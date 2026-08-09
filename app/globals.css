@@ -1,0 +1,213 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+  Material palette. Two substances only, matching the sculptor's own:
+  patinated bronze (warm, oxidised, low chroma) and forged/inox steel
+  (cool, near-neutral), both read against a flat limestone gallery wall.
+  Overriding Tailwind's amber + slate ramps re-tones every existing class.
+*/
+@theme {
+  /* Patina bronze */
+  --color-amber-50: oklch(0.968 0.01 78);
+  --color-amber-100: oklch(0.938 0.019 76);
+  --color-amber-200: oklch(0.885 0.028 74);
+  --color-amber-300: oklch(0.815 0.04 72);
+  --color-amber-400: oklch(0.715 0.055 68);
+  --color-amber-500: oklch(0.615 0.068 64);
+  --color-amber-600: oklch(0.53 0.072 60);
+  --color-amber-700: oklch(0.452 0.068 56);
+  --color-amber-800: oklch(0.378 0.058 52);
+  --color-amber-900: oklch(0.31 0.046 50);
+
+  /* Forged steel + limestone */
+  --color-slate-50: oklch(0.98 0.003 100);
+  --color-slate-100: oklch(0.958 0.004 95);
+  --color-slate-200: oklch(0.9 0.005 250);
+  --color-slate-300: oklch(0.84 0.006 250);
+  --color-slate-400: oklch(0.645 0.01 250);
+  --color-slate-500: oklch(0.505 0.011 250);
+  --color-slate-600: oklch(0.455 0.012 250);
+  --color-slate-700: oklch(0.37 0.013 248);
+  --color-slate-800: oklch(0.268 0.012 245);
+  --color-slate-900: oklch(0.185 0.011 245);
+}
+
+:root {
+  --background: oklch(0.978 0.003 100);
+  --foreground: oklch(0.185 0.011 245);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.185 0.011 245);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.185 0.011 245);
+  --primary: oklch(0.185 0.011 245);
+  --primary-foreground: oklch(0.978 0.003 100);
+  --secondary: oklch(0.958 0.004 95);
+  --secondary-foreground: oklch(0.268 0.012 245);
+  --muted: oklch(0.958 0.004 95);
+  --muted-foreground: oklch(0.455 0.012 245);
+  --accent: oklch(0.53 0.072 60);
+  --accent-foreground: oklch(0.978 0.003 100);
+  --border: oklch(0.9 0.005 250);
+  --input: oklch(0.84 0.006 250);
+  --ring: oklch(0.452 0.068 56);
+
+  /* Cut, not moulded: every corner is a sheared edge. */
+  --radius: 0rem;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+@theme inline {
+  --font-sans: var(--font-sans), "IBM Plex Sans", system-ui, sans-serif;
+  --font-serif: var(--font-serif), "Cormorant Garamond", Georgia, serif;
+  --font-mono: var(--font-mono), "IBM Plex Mono", monospace;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: 0rem;
+  --radius-md: 0rem;
+  --radius-lg: 0rem;
+  --radius-xl: 0rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
+    color-scheme: light;
+  }
+  body {
+    background-color: oklch(0.978 0.003 100);
+    color: oklch(0.185 0.011 245);
+  }
+
+  /* Square edges need a crisp, square focus mark. */
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  /*
+    Display voice: vertical stress, tight fit, blade serifs. The aspiration
+    to verticality is set in the leading, not in decoration.
+  */
+  h1,
+  h2,
+  h3,
+  .font-serif {
+    font-family: var(--font-serif), "Cormorant Garamond", serif;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+
+  h1 {
+    font-weight: 700;
+    line-height: 0.98;
+  }
+
+  h2 {
+    font-weight: 700;
+    line-height: 1.04;
+  }
+
+  p {
+    line-height: 1.68;
+    max-width: 70ch;
+  }
+
+  button,
+  a.btn-forged,
+  .interactive-press {
+    transition: background-color 180ms var(--ease-out), color 180ms var(--ease-out),
+      border-color 180ms var(--ease-out);
+  }
+}
+
+@layer utilities {
+  /*
+    Museum plate. One elevation authority only: a sheared hairline.
+    No shadow, no radius, no lift; the work supplies the depth.
+  */
+  .gallery-card {
+    @apply bg-white border border-slate-200 p-6 transition-colors duration-200;
+  }
+  .gallery-card:hover {
+    @apply border-slate-400;
+  }
+
+  /* Artwork plate: image flush to the edge, caption below a hairline. */
+  .artwork-plate {
+    @apply bg-white border border-slate-200 transition-colors duration-200;
+  }
+  .artwork-plate:hover {
+    @apply border-slate-400;
+  }
+
+  .btn-forged {
+    @apply px-6 py-3 bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs tracking-[0.12em] uppercase inline-flex items-center gap-3;
+  }
+
+  /*
+    The one authored moment: light travelling across a polished surface.
+    Hojbotă's finished metal reflects and fractures the ambient light; the
+    plate does the same when you approach it.
+  */
+  .specular {
+    position: relative;
+    overflow: hidden;
+  }
+  .specular::after {
+    content: "";
+    position: absolute;
+    inset: -40% -70%;
+    background: linear-gradient(
+      74deg,
+      transparent 42%,
+      rgba(255, 255, 255, 0.5) 50%,
+      transparent 58%
+    );
+    transform: translate3d(-120%, 0, 0);
+    transition: transform 1100ms var(--ease-out);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .group:hover .specular::after,
+  .specular:hover::after {
+    transform: translate3d(120%, 0, 0);
+  }
+
+  /* Muchie: the single accent mark, a cut bronze edge. */
+  .edge-mark {
+    @apply block h-px w-16 bg-amber-700;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .specular::after {
+      transition: none;
+      display: none;
+    }
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
