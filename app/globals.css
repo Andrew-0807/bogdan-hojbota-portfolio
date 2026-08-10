@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
+@custom-variant dark (&:is(.dark, .dark *));
 
 /*
   Material palette. Two substances only, matching the sculptor's own:
@@ -10,6 +10,8 @@
   Overriding Tailwind's amber + slate ramps re-tones every existing class.
 */
 @theme {
+  --color-white: var(--color-white);
+
   /* Patina bronze */
   --color-amber-50: oklch(0.968 0.01 78);
   --color-amber-100: oklch(0.938 0.019 76);
@@ -91,6 +93,7 @@
 }
 
 :root {
+  --color-white: oklch(1 0 0);
   --background: oklch(0.978 0.003 100);
   --foreground: oklch(0.185 0.011 245);
   --card: oklch(1 0 0);
