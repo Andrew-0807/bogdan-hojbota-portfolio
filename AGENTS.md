@@ -46,3 +46,7 @@ To verify builds:
 ```bash
 npm run build
 ```
+
+## Production Deployment
+* **Official Production URL**: `https://bogdan-hojbota.vercel.app` (Always use this exact URL for production deployment references).
+
