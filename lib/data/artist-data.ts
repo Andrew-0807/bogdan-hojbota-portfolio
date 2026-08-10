@@ -68,8 +68,7 @@ export const ARTWORKS: ArtworkData[] = [
     location: "Buzău (Simpozionul Internațional „Memoria Apei”)",
     narrative:
       "Proiectată ca o lucrare monumentală reprezentativă pentru ecologia spațiului urban, sculptura simbolizează misiunea de protecție și veghere asupra celei mai importante resurse ale planetei – apa. Artistul construiește din foi tectonice și muchii metalice o figură tutelară nonfigurativă. Liniile de forță verticale exprimă fermitate și vigilență, în timp ce spațiile goale lasă aerul și mediul înconjurător să treacă prin structura oțelului.",
-    // Not featured: this is the hero plate on the home page, showing it twice reads as a duplicate.
-    image_url: "/industrial-metal-sculpture-welded-steel.jpg",
+    image_url: "/images/artworks/strajer-al-apelor.jpg",
     featured: false,
   },
   {
@@ -82,7 +81,7 @@ export const ARTWORKS: ArtworkData[] = [
     location: "Colecție privată / WIN Gallery, București",
     narrative:
       "Neliniștea unui cerc este un exemplu emblematic pentru stăpânirea tehnologică a inoxului. Pornind de la forma geometrică perfectă a cercului, Bogdan Hojbotă introduce tensiune și mișcare prin torsionarea materialului. Suprafața metalului de o strălucire rece captează și reflectă mediul ambiental în volute dinamice, anulând impresia de masă compactă.",
-    image_url: "/polished-stainless-steel-sculpture-ascending-curve.jpg",
+    image_url: "/images/artworks/nelinistea-unui-cerc.png",
     featured: true,
   },
   {
@@ -95,9 +94,20 @@ export const ARTWORKS: ArtworkData[] = [
     location: "Craiova (Simpozionul Internațional „Drumuri Brâncușiene”)",
     narrative:
       "Deși consacrat ca metalist, Hojbotă abordează cioplirea în marmură pentru a explora inflorescența și evoluția organică a formei. Lucrarea propune o expansiune a volumelor ce par să răsară din piatră, aducând un omagiu limbajului brâncușian al esențializării.",
-    // Not featured until a marble photograph exists: this file shows stainless steel,
-    // while the piece is declared "Marmură cioplită și șlefuită".
-    image_url: "/abstract-metal-sculpture-ascension-stainless-steel.jpg",
+    image_url: "/images/artworks/influorescenta.jpg",
+    featured: true,
+  },
+  {
+    id: "trofeul-pietei-de-brokeraj",
+    title: "Trofeul Pieței de Brokeraj",
+    year: 2020,
+    materials: "Aliaj metalic prelucrat și finisat grafic",
+    dimensions: "Design de trofeu simbolic",
+    category: "Trofee & Design Metalic",
+    location: "Gala Premiilor XPRIMM ale Pieței de Brokeraj",
+    narrative:
+      "Demonstrează aplicabilitatea esteticii metalului în zona obiectului simbolic de prestigiu. Trofeul sintetizează ideile de performanță, echilibru și ascensiune, având caracteristicile minimalismului său sculptural.",
+    image_url: "/images/artworks/trofeul-pietei-de-brokeraj.jpg",
     featured: false,
   },
   {
@@ -110,7 +120,7 @@ export const ARTWORKS: ArtworkData[] = [
     location: "Parcul „Vasile Voiculescu”, Buzău",
     narrative:
       "O lucrare de sinteză portretistică ce dovedește versatilitatea sculptorului în registrul figurativ clasic. Artistul surprinde fizionomia și profilul spiritual ascetic al marelui poet și prozator Vasile Voiculescu cu o modelare sobră și plină de gravitate.",
-    image_url: "/bronze-portrait-bust-professor-memorial-sculpture.jpg",
+    image_url: "/images/artworks/bustul-vasile-voiculescu.jpg",
     featured: true,
   },
   {
@@ -123,72 +133,20 @@ export const ARTWORKS: ArtworkData[] = [
     location: "Parcul Municipal Vest, Ploiești",
     narrative:
       "Creată cu prilejul Centenarului Marii Uniri, lucrarea îmbină masivitatea pietrei cu forța liniei metalice. Compoziția este construită pe ideea de continuitate, stăpânire a spațiului și durabilitate istorică.",
-    image_url: "/industrial-metal-sculpture-welded-steel-abstract.jpg",
+    image_url: "/images/artworks/monumentul-romania-100.jpg",
     featured: true,
   },
   {
-    id: "sculptura-parcul-titan",
-    title: "Sculptură Monumentală Metal – Parcul Titan",
-    year: 2013,
-    materials: "Foi de oțel debitate, deformate la rece și sudate",
-    dimensions: "Înălțime cca. 4 metri",
-    category: "Sculptură Monumentală",
-    location: "Parcul Titan (Parcul Artelor), Sector 3, București",
-    narrative:
-      "Realizată în cadrul taberei „Sculptura Mileniului 3”, această operă exemplifică forța industrială transpusă în artă pură. Foaia grea de metal este transformată într-o structură spațială suplă, aeriană, ale cărei muchii ascuțite și decupaje creează perspective schimbătoare.",
-    image_url: "/4-meter-tall-welded-metal-sculpture-park-outdoor-c.jpg",
-    featured: true,
-  },
-  {
-    id: "moment-de-zbor",
-    title: "Moment de zbor",
-    year: 2013,
-    materials: "Oțel inoxidabil (inox) polizat și finisat",
-    dimensions: "Sculptură de atelier",
+    id: "ciclul-silueta-cuplu-tors-emily",
+    title: "Ciclul Siluetă, Cuplu, Tors, Emily",
+    year: 2018,
+    materials: "Metal, foi de oțel, bronz, tehnici mixte",
+    dimensions: "Dimensiuni de atelier",
     category: "Sculptură de Atelier",
-    location: "Premiul Muzeului Național de Artă al Moldovei (Saloanele Moldovei)",
+    location: "Colecții publice și particulare (România, Germania, Olanda)",
     narrative:
-      "Una dintre cele mai rafinate căutări ale artistului pe tema eliberării de gravitație. Utilizând lamele subțiri de inox tăiate cu precizie, Hojbotă esențializează mișcarea ascensională, dizolvând rigoarea materialului dur într-un dinamism muzical.",
-    image_url: "/abstract-metal-sculpture-ascension-stainless-steel.jpg",
-    featured: true,
-  },
-  {
-    id: "sculptura-zbor-sangeorz-bai",
-    title: "Sculptură Zbor – artFORest",
-    year: 2012,
-    materials: "Structură din oțel debitat și patinat",
-    dimensions: "Sculptură monumentală ambientală",
-    category: "Sculptură Monumentală",
-    location: "Muzeul de Artă Comparată, Sângeorz-Băi",
-    narrative:
-      "Amplasată la intrarea spațiului muzeal din Sângeorz-Băi, lucrarea din oțel funcționează ca o poartă sau introducere simbolică în lumea artei vizuale contemporane, deschizând căi de aspirație spirituală.",
-    image_url: "/monumental-metal-gate-portal-stainless-steel-entra.jpg",
-    featured: true,
-  },
-  {
-    id: "bustul-paul-bran",
-    title: "Bustul Prof. Univ. Dr. Paul Bran",
-    year: 2004,
-    materials: "Bronz turnat, patinat",
-    dimensions: "Bust comemorativ",
-    category: "Busturi & Portrete Comemorative",
-    location: "Corpul „Paul Bran”, Academia de Studii Economice (ASE), București",
-    narrative:
-      "Realizat în amintirea unuia dintre cei mai importanți rectori ai școlii economice românești. Bustul impresionează prin rigoare anatomică și expresivitate psiho-individuală, conferind o notă de noblețe instituțională.",
-    image_url: "/bronze-portrait-bust-professor-memorial-sculpture.jpg",
-    featured: false,
-  },
-  {
-    id: "trofeul-pietei-de-brokeraj",
-    title: "Trofeul Pieței de Brokeraj",
-    year: 2020,
-    materials: "Aliaj metalic prelucrat și finisat grafic",
-    dimensions: "Design de trofeu simbolic",
-    category: "Trofee & Design Metalic",
-    location: "Gala Premiilor XPRIMM ale Pieței de Brokeraj",
-    narrative:
-      "Demonstrează aplicabilitatea esteticii metalului în zona obiectului simbolic de prestigiu. Trofeul sintetizează ideile de performanță, echilibru și ascensiune, având caracteristicile minimalismului său sculptural.",
-    image_url: "/metal-sculpture-de-semn-bronze-brass-abstract-form.jpg",
+      "Latura lirică și senină a creației lui Hojbotă. Formele sugerează subtil conturul corpului uman (Siluetă, Tors), îngemănarea a două volume (Cuplu) sau grația juvenilă (Emily).",
+    image_url: "/images/artworks/ciclul-silueta-cuplu-tors-emily.jpg",
     featured: false,
   },
   {
@@ -201,20 +159,59 @@ export const ARTWORKS: ArtworkData[] = [
     location: "Muzeul de Artă Craiova / Galeriile UAP (Simeza, Orizont)",
     narrative:
       "Serie cu o pronunțată încărcătură dramatică și filozofică. Lucrările din ciclul Dantescă sau Conflict folosesc suduri vizibile, unghiuri ascuțite și patine întunecate pentru a exprima confruntarea interiorizată.",
-    image_url: "/industrial-metal-sculpture-welded-steel-abstract.jpg",
+    image_url: "/images/artworks/ciclul-dantesca-conflict-vibratie.jpg",
     featured: false,
   },
   {
-    id: "ciclul-silueta-cuplu-tors-emily",
-    title: "Ciclul Siluetă, Cuplu, Tors, Emily",
-    year: 2018,
-    materials: "Metal, foi de oțel, bronz, tehnici mixte",
-    dimensions: "Dimensiuni de atelier",
-    category: "Sculptură de Atelier",
-    location: "Colecții publice și particulare (România, Germania, Olanda)",
+    id: "sculptura-parcul-titan",
+    title: "Sculptură Monumentală Metal – Parcul Titan",
+    year: 2013,
+    materials: "Foi de oțel debitate, deformate la rece și sudate",
+    dimensions: "Înălțime cca. 4 metri",
+    category: "Sculptură Monumentală",
+    location: "Parcul Titan (Parcul Artelor), Sector 3, București",
     narrative:
-      "Latura lirică și senină a creației lui Hojbotă. Formele sugerează subtil conturul corpului uman (Siluetă, Tors), îngemănarea a două volume (Cuplu) sau grația juvenilă (Emily).",
-    image_url: "/metal-sculpture-de-semn-bronze-brass-abstract-form.jpg",
+      "Realizată în cadrul taberei „Sculptura Mileniului 3”, această operă exemplifică forța industrială transpusă în artă pură. Foaia grea de metal este transformată într-o structură spațială suplă, aeriană, ale cărei muchii ascuțite și decupaje creează perspective schimbătoare.",
+    image_url: "/images/artworks/sculptura-parcul-titan.jpg",
+    featured: true,
+  },
+  {
+    id: "moment-de-zbor",
+    title: "Moment de zbor",
+    year: 2013,
+    materials: "Oțel inoxidabil (inox) polizat și finisat",
+    dimensions: "Sculptură de atelier",
+    category: "Sculptură de Atelier",
+    location: "Premiul Muzeului Național de Artă al Moldovei (Saloanele Moldovei)",
+    narrative:
+      "Una dintre cele mai rafinate căutări ale artistului pe tema eliberării de gravitație. Utilizând lamele subțiri de inox tăiate cu precizie, Hojbotă esențializează mișcarea ascensională, dizolvând rigoarea materialului dur într-un dinamism muzical.",
+    image_url: "/images/artworks/moment-de-zbor.jpg",
+    featured: true,
+  },
+  {
+    id: "sculptura-zbor-sangeorz-bai",
+    title: "Sculptură Zbor – artFORest",
+    year: 2012,
+    materials: "Structură din oțel debitat și patinat",
+    dimensions: "Sculptură monumentală ambientală",
+    category: "Sculptură Monumentală",
+    location: "Muzeul de Artă Comparată, Sângeorz-Băi",
+    narrative:
+      "Amplasată la intrarea spațiului muzeal din Sângeorz-Băi, lucrarea din oțel funcționează ca o poartă sau introducere simbolică în lumea artei vizuale contemporane, deschizând căi de aspirație spirituală.",
+    image_url: "/images/artworks/sculptura-zbor-sangeorz-bai.jpg",
+    featured: false,
+  },
+  {
+    id: "bustul-paul-bran",
+    title: "Bustul Prof. Univ. Dr. Paul Bran",
+    year: 2004,
+    materials: "Bronz turnat, patinat",
+    dimensions: "Bust comemorativ",
+    category: "Busturi & Portrete Comemorative",
+    location: "Corpul „Paul Bran”, Academia de Studii Economice (ASE), București",
+    narrative:
+      "Realizat în amintirea unuia dintre cei mai importanți rectori ai școlii economice românești. Bustul impresionează prin rigoare anatomică și expresivitate psiho-individuală, conferind o notă de noblețe instituțională.",
+    image_url: "/images/artworks/bustul-paul-bran.jpg",
     featured: false,
   },
 ]

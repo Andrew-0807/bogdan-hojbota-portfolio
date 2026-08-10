@@ -50,8 +50,8 @@ export function SiteFooter() {
                 </Link>
               </li>
               <li>
-                <Link href="/comisii" className="hover:text-amber-700 transition-colors">
-                  Comisii & Servicii
+                <Link href="/contact" className="hover:text-amber-700 transition-colors">
+                  Contact
                 </Link>
               </li>
             </ul>
@@ -90,10 +90,10 @@ export function SiteFooter() {
               </div>
               <div className="pt-2">
                 <Link
-                  href="/comisii"
+                  href="/contact"
                   className="inline-flex items-center gap-1.5 text-xs font-semibold text-amber-700 hover:text-amber-800 transition-colors underline underline-offset-4"
                 >
-                  <span>Cere detalii comisionare</span>
+                  <span>Formular de contact</span>
                   <ArrowUpRight className="h-3 w-3" />
                 </Link>
               </div>

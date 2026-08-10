@@ -18,7 +18,6 @@ export function SiteHeader() {
     { href: "/profil", label: "Profil" },
     { href: "/galerie", label: "Portofoliu" },
     { href: "/cronologie", label: "Cronologie" },
-    { href: "/comisii", label: "Comisii" },
     { href: "/contact", label: "Contact" },
   ]
 
@@ -78,10 +77,10 @@ export function SiteHeader() {
             </a>
 
             <Link
-              href="/comisii"
+              href="/contact"
               className="group h-9 pl-4 pr-1 bg-slate-900 hover:bg-slate-800 text-white font-semibold text-[11px] uppercase tracking-[0.12em] flex items-center gap-3 transition-colors"
             >
-              <span>Solicită Comisie</span>
+              <span>Contactează</span>
               <span className="w-7 h-7 bg-amber-700 flex items-center justify-center transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
                 <ArrowUpRight className="h-3.5 w-3.5" />
               </span>
@@ -138,11 +137,11 @@ export function SiteHeader() {
                   <span>{ARTIST_INFO.email}</span>
                 </a>
                 <Link
-                  href="/comisii"
+                  href="/contact"
                   onClick={() => setMobileMenuOpen(false)}
                   className="flex items-center justify-center gap-3 w-full h-12 bg-slate-900 text-white font-semibold text-xs uppercase tracking-[0.12em]"
                 >
-                  <span>Solicită o comisie</span>
+                  <span>Trimite un mesaj</span>
                   <ArrowUpRight className="h-4 w-4 text-amber-400" />
                 </Link>
               </div>

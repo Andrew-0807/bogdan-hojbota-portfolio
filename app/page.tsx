@@ -22,10 +22,10 @@ export default function HomePage() {
 
       <main className="flex-1">
         {/* HERO — the work first, the claim second */}
-        <section className="relative border-b border-slate-200 bg-white overflow-x-clip">
+        <section className="relative border-b border-slate-200 bg-white">
           <div className="container mx-auto px-4 sm:px-6">
-            <div className="grid grid-cols-1 lg:grid-cols-12 lg:gap-16 items-start lg:items-stretch">
-              <div className="@container order-2 lg:order-1 lg:col-span-6 pt-10 pb-12 lg:py-28 flex flex-col">
+            <div className="grid grid-cols-1 lg:grid-cols-12 lg:gap-16 items-start">
+              <div className="@container order-2 lg:order-1 lg:col-span-7 pt-10 pb-12 lg:py-28 flex flex-col">
                 <ScrollReveal>
                   {/* Sized to its column, not the viewport: the hard break is gone so
                       `text-wrap: balance` can set the ragging itself. */}
@@ -47,10 +47,10 @@ export default function HomePage() {
                 <ScrollReveal delay={0.16}>
                   <div className="flex flex-wrap items-stretch gap-3 mt-10">
                     <Link
-                      href="/comisii"
+                      href="/contact"
                       className="group h-12 pl-6 pr-1 bg-slate-900 hover:bg-slate-800 text-white font-semibold text-[11px] uppercase tracking-[0.14em] inline-flex items-center gap-4 transition-colors"
                     >
-                      <span>Solicită o comisie</span>
+                      <span>Contactează atelierul</span>
                       <span className="w-10 h-10 bg-amber-700 flex items-center justify-center transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
                         <ArrowUpRight className="h-4 w-4" />
                       </span>
@@ -94,23 +94,25 @@ export default function HomePage() {
                 </ScrollReveal>
               </div>
 
-              {/* The work, uncropped by a frame: full-bleed to the page edge. The
-                  offset must clear the centring gutter *and* the container's px-6,
-                  and the container caps at a different width per breakpoint. */}
-              <div className="order-1 lg:order-2 lg:col-span-6 lg:-mr-[calc((100vw-64rem)/2+1.5rem)] xl:-mr-[calc((100vw-80rem)/2+1.5rem)] 2xl:-mr-[calc((100vw-96rem)/2+1.5rem)]">
-                <Link href="/galerie/strajer-al-apelor" className="group block lg:h-full">
-                  <figure className="flex flex-col lg:h-full">
-                    <div className="specular relative aspect-[4/5] sm:aspect-[16/11] lg:aspect-auto lg:flex-1 lg:min-h-[32rem] bg-slate-100">
+              {/* Held inside the container gutter and topped out with the text
+                  column, so the plate reads as a mounted work rather than a
+                  bleed. Its own aspect ratio sets the height; nothing stretches. */}
+              <div className="order-1 lg:order-2 lg:col-span-5 pt-8 lg:pt-28">
+                <Link href="/galerie/strajer-al-apelor" className="group block">
+                  <figure className="flex flex-col">
+                    {/* Square frame because the source is 1024×1024: any other
+                        ratio is object-cover eating the sculpture's edges. */}
+                    <div className="specular relative aspect-square bg-slate-100">
                       <Image
                         src="/industrial-metal-sculpture-welded-steel.jpg"
                         alt="Străjer al Apelor: figură tutelară nonfigurativă din foi tectonice de oțel sudat, cu linii de forță verticale și goluri prin care trece aerul."
                         fill
-                        sizes="(min-width: 1536px) 50vw, (min-width: 1024px) 55vw, 100vw"
+                        sizes="(min-width: 1024px) 38vw, 100vw"
                         className="object-cover"
                         priority
                       />
                     </div>
-                    <figcaption className="py-5 lg:pr-8 flex flex-wrap items-baseline gap-x-4 gap-y-1 border-b border-slate-200 lg:border-b-0">
+                    <figcaption className="py-5 flex flex-wrap items-baseline gap-x-4 gap-y-1 border-b border-slate-200 lg:border-b-0">
                       <span className="font-serif text-2xl font-bold text-slate-900 group-hover:text-amber-800 transition-colors">
                         Străjer al Apelor
                       </span>

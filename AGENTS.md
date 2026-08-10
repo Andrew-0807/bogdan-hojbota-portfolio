@@ -34,7 +34,6 @@ Official portfolio and commission website for **Prof. Univ. Dr. Bogdan Severin H
 * `/profil` — Academic biography, UNArte history, visual philosophy, awards.
 * `/galerie` & `/galerie/[id]` — Portfolio catalog with category filters + SSG detail pages for all 12 cataloged works.
 * `/cronologie` — Exhibition timeline & list view (1981–2025).
-* `/comisii` — Commission services breakdown & 3-step process.
 * `/contact` — Direct phone click-to-call + mailto email submission form.
 
 ---
