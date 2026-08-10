@@ -6,9 +6,9 @@ import { SiteFooter } from "@/components/site-footer"
 import Link from "next/link"
 import Image from "next/image"
 import { notFound } from "next/navigation"
-import { getArtwork, getArtworks, getArtistInfo } from "@/lib/data/artist-data"
+import { getArtwork, getArtworks } from "@/lib/data/artist-data"
 import { useLanguage } from "@/lib/context/language-context"
-import { ArrowLeft, ArrowRight, Mail, ArrowUpRight } from "lucide-react"
+import { ArrowLeft, ArrowRight } from "lucide-react"
 
 interface ArtworkDetailContentProps {
   id: string
@@ -18,7 +18,6 @@ export function ArtworkDetailContent({ id }: ArtworkDetailContentProps) {
   const { language, t } = useLanguage()
   const artwork = useMemo(() => getArtwork(id, language), [id, language])
   const artworks = useMemo(() => getArtworks(language), [language])
-  const artistInfo = useMemo(() => getArtistInfo(language), [language])
 
   if (!artwork) {
     notFound()
@@ -101,36 +100,6 @@ export function ArtworkDetailContent({ id }: ArtworkDetailContentProps) {
                 <p className="mt-4 font-serif text-xl sm:text-2xl font-light leading-[1.45] text-slate-800">
                   {artwork.narrative}
                 </p>
-              </div>
-
-              <div className="mt-12 pt-8 border-t border-slate-900">
-                <h2 className="font-serif text-2xl font-bold text-slate-900">
-                  {t("detail_commission_heading")}
-                </h2>
-                <p className="mt-3 text-sm text-slate-600 leading-relaxed">
-                  {t("detail_commission_sub")}
-                </p>
-
-                <div className="flex flex-col sm:flex-row gap-3 mt-6">
-                  {/* Email until a real telephone number exists — see profil-content. */}
-                  <a
-                    href={`mailto:${artistInfo.email}`}
-                    className="h-12 px-5 border border-slate-300 hover:border-slate-900 text-slate-900 font-mono text-xs inline-flex items-center justify-center gap-2 transition-colors"
-                  >
-                    <Mail className="h-4 w-4 text-amber-700" />
-                    <span>{artistInfo.email}</span>
-                  </a>
-
-                  <Link
-                    href={`/contact?subject=${encodeURIComponent(artwork.title)}`}
-                    className="group h-12 pl-5 pr-1 bg-slate-900 hover:bg-slate-800 text-white font-semibold text-[11px] uppercase tracking-[0.14em] inline-flex items-center justify-between gap-4 flex-1 transition-colors"
-                  >
-                    <span>{t("detail_send_inquiry")}</span>
-                    <span className="w-10 h-10 bg-amber-700 flex items-center justify-center shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
-                      <ArrowUpRight className="h-4 w-4" />
-                    </span>
-                  </Link>
-                </div>
               </div>
             </div>
           </div>
