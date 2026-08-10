@@ -24,11 +24,11 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
         type="button"
         aria-label="Switch theme"
         className={cn(
-          "inline-flex items-center justify-center h-[26px] w-[26px] p-0.5 bg-slate-100 border border-slate-200/90 text-slate-500 hover:text-slate-900 hover:bg-slate-200/60 transition-colors duration-150",
+          "flex items-center justify-center h-[26px] w-[26px] shrink-0 bg-slate-100 border border-slate-200/90 text-slate-500 hover:text-slate-900 hover:bg-slate-200/60 transition-colors duration-150",
           className,
         )}
       >
-        <Moon className="h-3.5 w-3.5 opacity-0" />
+        <Moon className="h-3.5 w-3.5 shrink-0 opacity-0" />
       </button>
     )
   }
@@ -42,11 +42,11 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
       aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
       aria-pressed={isDark}
       className={cn(
-        "inline-flex items-center justify-center h-[26px] w-[26px] p-0.5 bg-slate-100 border border-slate-200/90 text-slate-500 hover:text-slate-900 hover:bg-slate-200/60 transition-colors duration-150",
+        "flex items-center justify-center h-[26px] w-[26px] shrink-0 bg-slate-100 border border-slate-200/90 text-slate-500 hover:text-slate-900 hover:bg-slate-200/60 transition-colors duration-150",
         className,
       )}
     >
-      {isDark ? <Sun className="h-3.5 w-3.5" /> : <Moon className="h-3.5 w-3.5" />}
+      {isDark ? <Sun className="h-3.5 w-3.5 shrink-0" /> : <Moon className="h-3.5 w-3.5 shrink-0" />}
     </button>
   )
 }
