@@ -7,24 +7,28 @@ import { Input } from "@/components/ui/input"
 import ScrollReveal from "@/components/scroll-reveal"
 import Link from "next/link"
 import Image from "next/image"
-import { ARTWORKS } from "@/lib/data/artist-data"
+import { getArtworks } from "@/lib/data/artist-data"
+import { useLanguage } from "@/lib/context/language-context"
 import { Search, ArrowRight, MapPin } from "lucide-react"
 
 export default function GalleryPage() {
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedCategory, setSelectedCategory] = useState<string>("all")
+  const { language, t } = useLanguage()
+
+  const artworks = useMemo(() => getArtworks(language), [language])
 
   const categories = [
-    { id: "all", label: "Toate Operele" },
-    { id: "Sculptură Monumentală", label: "Sculptură Monumentală" },
-    { id: "Sculptură de Atelier", label: "Sculptură de Atelier" },
-    { id: "Busturi & Portrete Comemorative", label: "Busturi & Portrete" },
-    { id: "Trofee & Design Metalic", label: "Trofee & Design Metalic" },
-    { id: "Cicluri Conceptual", label: "Cicluri Conceptuale" },
+    { id: "all", label: t("cat_all") },
+    { id: "Sculptură Monumentală", label: t("cat_monumental") },
+    { id: "Sculptură de Atelier", label: t("cat_atelier") },
+    { id: "Busturi & Portrete Comemorative", label: t("cat_busturi") },
+    { id: "Trofee & Design Metalic", label: t("cat_trofee") },
+    { id: "Cicluri Conceptual", label: t("cat_conceptual") },
   ]
 
   const filteredArtworks = useMemo(() => {
-    return ARTWORKS.filter((art) => {
+    return artworks.filter((art) => {
       const matchesCategory = selectedCategory === "all" || art.category === selectedCategory
 
       const query = searchQuery.toLowerCase().trim()
@@ -38,7 +42,7 @@ export default function GalleryPage() {
 
       return matchesCategory && matchesSearch
     })
-  }, [searchQuery, selectedCategory])
+  }, [searchQuery, selectedCategory, artworks])
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 font-sans selection:bg-amber-600 selection:text-white">
@@ -50,13 +54,11 @@ export default function GalleryPage() {
           <div className="container mx-auto px-4 sm:px-6">
             <div className="max-w-3xl">
               <h1 className="font-serif text-5xl sm:text-6xl font-bold text-slate-900">
-                Portofoliu sculptural
+                {t("gallery_heading")}
               </h1>
               <span className="edge-mark mt-7" />
               <p className="mt-7 text-base sm:text-lg text-slate-600 leading-relaxed">
-                Întreaga creație a sculptorului Bogdan Severin Hojbotă: monumente urbane de for
-                public, busturi memoriale turnate în bronz, sculpturi de atelier din inox și trofee
-                metalice.
+                {t("gallery_sub")}
               </p>
             </div>
           </div>
@@ -88,8 +90,8 @@ export default function GalleryPage() {
               <div className="relative w-full md:w-64 shrink-0">
                 <Search className="absolute left-0 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-slate-500 pointer-events-none" />
                 <Input
-                  aria-label="Caută în portofoliu"
-                  placeholder="Caută după titlu, material…"
+                  aria-label={t("gallery_search_aria")}
+                  placeholder={t("gallery_search_placeholder")}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="h-9 pl-6 bg-transparent border-0 border-b border-slate-200 text-slate-900 text-xs placeholder:text-slate-500 focus-visible:ring-0 focus-visible:border-slate-900"
@@ -103,7 +105,7 @@ export default function GalleryPage() {
         <section className="py-14 sm:py-20">
           <div className="container mx-auto px-4 sm:px-6">
             <p className="font-mono text-[11px] text-slate-500 mb-10" aria-live="polite">
-              {filteredArtworks.length} din {ARTWORKS.length} lucrări
+              {t("gallery_count", { filtered: filteredArtworks.length, total: artworks.length })}
             </p>
 
             {filteredArtworks.length > 0 ? (
@@ -111,21 +113,24 @@ export default function GalleryPage() {
                 {filteredArtworks.map((art, idx) => (
                   <ScrollReveal key={art.id} delay={idx * 0.05}>
                     <Link href={`/galerie/${art.id}`} className="group flex flex-col h-full">
-                      <div className="specular relative aspect-[4/3] bg-slate-100 border border-slate-200 group-hover:border-slate-400 transition-colors">
+                      {/* Square mount, contained — see app/page.tsx. The catalogue
+                          holds both 2:3 monuments and 3:2 studio shots. */}
+                      <div className="specular relative aspect-square bg-slate-100 border border-slate-200 group-hover:border-slate-400 transition-colors">
                         <Image
                           src={art.image_url}
-                          alt={art.title}
+                          alt={`${art.title}, ${art.materials}, ${art.year}`}
+                          priority={idx < 3}
                           fill
                           sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                          className="object-cover"
+                          className="object-contain"
                         />
                       </div>
 
                       <div className="pt-5 flex flex-col flex-1">
                         <div className="flex items-baseline justify-between gap-3">
-                          <h3 className="font-serif text-2xl font-bold text-slate-900 group-hover:text-amber-800 transition-colors">
+                          <h2 className="font-serif text-2xl font-bold text-slate-900 group-hover:text-amber-800 transition-colors">
                             {art.title}
-                          </h3>
+                          </h2>
                           <span className="font-mono text-[11px] text-slate-500 shrink-0">
                             {art.year}
                           </span>
@@ -143,7 +148,7 @@ export default function GalleryPage() {
                             <span className="truncate">{art.location}</span>
                           </span>
                           <span className="uppercase tracking-[0.14em] font-semibold text-amber-800 flex items-center gap-1.5 shrink-0">
-                            <span>Detalii</span>
+                            <span>{t("details")}</span>
                             <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
                           </span>
                         </div>
@@ -155,11 +160,10 @@ export default function GalleryPage() {
             ) : (
               <div className="max-w-xl border-t border-slate-900 pt-8">
                 <h2 className="font-serif text-3xl font-bold text-slate-900">
-                  Nicio lucrare pe acest criteriu
+                  {t("gallery_no_results_title")}
                 </h2>
                 <p className="mt-3 text-sm text-slate-600">
-                  Căutarea „{searchQuery}” nu are corespondent în catalog. Încercați un material
-                  („inox”, „bronz”), un oraș sau un an.
+                  {t("gallery_no_results_sub", { query: searchQuery })}
                 </p>
                 <button
                   onClick={() => {
@@ -168,7 +172,7 @@ export default function GalleryPage() {
                   }}
                   className="mt-6 h-11 px-6 bg-slate-900 hover:bg-slate-800 text-white text-[11px] uppercase tracking-[0.14em] font-semibold transition-colors"
                 >
-                  Arată tot catalogul
+                  {t("gallery_show_all")}
                 </button>
               </div>
             )}

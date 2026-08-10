@@ -7,18 +7,20 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X, Mail, ArrowUpRight } from "lucide-react"
 import { useState } from "react"
 import { ARTIST_INFO } from "@/lib/data/artist-data"
+import { useLanguage } from "@/lib/context/language-context"
+import { LanguageToggle } from "@/components/language-toggle"
 
 export function SiteHeader() {
   const pathname = usePathname()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const { t } = useLanguage()
 
-  /* Short labels: the full Romanian titles overran the h-16 rail below 2xl. */
   const links = [
-    { href: "/", label: "Acasă" },
-    { href: "/profil", label: "Profil" },
-    { href: "/galerie", label: "Portofoliu" },
-    { href: "/cronologie", label: "Cronologie" },
-    { href: "/contact", label: "Contact" },
+    { href: "/", label: t("nav_home") },
+    { href: "/profil", label: t("nav_profile") },
+    { href: "/galerie", label: t("nav_portfolio") },
+    { href: "/cronologie", label: t("nav_timeline") },
+    { href: "/contact", label: t("nav_contact") },
   ]
 
   return (
@@ -36,7 +38,7 @@ export function SiteHeader() {
                 {ARTIST_INFO.shortName}
               </span>
               <span className="text-[10px] uppercase tracking-[0.16em] text-slate-500 font-medium mt-1 hidden sm:inline-block">
-                Sculptor · Prof. Univ. Dr.
+                {t("header_artist_role")}
               </span>
             </div>
           </Link>
@@ -67,7 +69,7 @@ export function SiteHeader() {
             })}
           </nav>
 
-          <div className="hidden sm:flex items-center gap-3 shrink-0">
+          <div className="hidden sm:flex items-center gap-4 shrink-0">
             <a
               href={`mailto:${ARTIST_INFO.email}`}
               className="hidden 2xl:flex items-center gap-2 text-[11px] text-slate-600 hover:text-amber-800 transition-colors font-mono"
@@ -76,22 +78,36 @@ export function SiteHeader() {
               <span>{ARTIST_INFO.email}</span>
             </a>
 
+            <LanguageToggle />
+
             <Link
               href="/contact"
               className="group h-9 pl-4 pr-1 bg-slate-900 hover:bg-slate-800 text-white font-semibold text-[11px] uppercase tracking-[0.12em] flex items-center gap-3 transition-colors"
             >
-              <span>Contactează</span>
+              <span>{t("header_contact_btn")}</span>
               <span className="w-7 h-7 bg-amber-700 flex items-center justify-center transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
                 <ArrowUpRight className="h-3.5 w-3.5" />
               </span>
             </Link>
           </div>
 
+          <div className="flex items-center gap-2 sm:hidden">
+            <LanguageToggle />
+            <button
+              className="p-2 text-slate-700 hover:text-slate-900 transition-colors"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-expanded={mobileMenuOpen}
+              aria-label={mobileMenuOpen ? t("header_close_menu") : t("header_open_menu")}
+            >
+              {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
+          </div>
+
           <button
-            className="xl:hidden -mr-2 p-2 text-slate-700 hover:text-slate-900 transition-colors"
+            className="hidden sm:block xl:hidden -mr-2 p-2 text-slate-700 hover:text-slate-900 transition-colors"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-expanded={mobileMenuOpen}
-            aria-label={mobileMenuOpen ? "Închide meniul" : "Deschide meniul"}
+            aria-label={mobileMenuOpen ? t("header_close_menu") : t("header_open_menu")}
           >
             {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
@@ -141,7 +157,7 @@ export function SiteHeader() {
                   onClick={() => setMobileMenuOpen(false)}
                   className="flex items-center justify-center gap-3 w-full h-12 bg-slate-900 text-white font-semibold text-xs uppercase tracking-[0.12em]"
                 >
-                  <span>Trimite un mesaj</span>
+                  <span>{t("commissions_send_msg")}</span>
                   <ArrowUpRight className="h-4 w-4 text-amber-400" />
                 </Link>
               </div>

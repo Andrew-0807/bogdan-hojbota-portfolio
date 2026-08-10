@@ -7,29 +7,18 @@ import { SiteFooter } from "@/components/site-footer"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
 import ScrollReveal from "@/components/scroll-reveal"
-import { ARTIST_INFO } from "@/lib/data/artist-data"
-import { Phone, Mail, ArrowUpRight } from "lucide-react"
-
-const INQUIRY_TYPES = [
-  { value: "commission_monumental", label: "Sculptură monumentală și spațiu public" },
-  { value: "commission_bust", label: "Bust comemorativ / portret în bronz" },
-  { value: "commission_atelier", label: "Sculptură de atelier / colecție privată" },
-  { value: "commission_trophy", label: "Trofeu metalic comisionat" },
-  { value: "general", label: "Solicitare generală / invitație la expoziție" },
-]
+import { getArtistInfo } from "@/lib/data/artist-data"
+import { useLanguage } from "@/lib/context/language-context"
+import { Mail, ArrowUpRight } from "lucide-react"
 
 const fieldClass =
   "h-11 bg-white border-slate-300 text-sm text-slate-900 placeholder:text-slate-500 focus-visible:border-slate-900 focus-visible:ring-0"
 
 export default function ContactPage() {
+  const { language, t } = useLanguage()
+  const artistInfo = getArtistInfo(language)
+
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [phone, setPhone] = useState("")
@@ -37,16 +26,24 @@ export default function ContactPage() {
   const [message, setMessage] = useState("")
   const [opened, setOpened] = useState(false)
 
+  const inquiryTypes = [
+    { value: "commission_monumental", label: t("contact_type_monumental") },
+    { value: "commission_bust", label: t("contact_type_bust") },
+    { value: "commission_atelier", label: t("contact_type_atelier") },
+    { value: "commission_trophy", label: t("contact_type_trophy") },
+    { value: "general", label: t("contact_type_general") },
+  ]
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
 
-    const label = INQUIRY_TYPES.find((t) => t.value === inquiryType)?.label ?? inquiryType
+    const label = inquiryTypes.find((t) => t.value === inquiryType)?.label ?? inquiryType
     const subject = encodeURIComponent(`Solicitare website: ${label} — ${name}`)
     const body = encodeURIComponent(
       `Nume: ${name}\nEmail: ${email}\nTelefon: ${phone || "nespecificat"}\nTip solicitare: ${label}\n\nMesaj:\n${message}`,
     )
 
-    window.location.href = `mailto:${ARTIST_INFO.email}?subject=${subject}&body=${body}`
+    window.location.href = `mailto:${artistInfo.email}?subject=${subject}&body=${body}`
     setOpened(true)
   }
 
@@ -58,11 +55,12 @@ export default function ContactPage() {
         <section className="pt-16 pb-12 sm:pt-24 sm:pb-16 bg-white border-b border-slate-200">
           <div className="container mx-auto px-4 sm:px-6">
             <div className="max-w-3xl">
-              <h1 className="font-serif text-5xl sm:text-6xl font-bold text-slate-900">Contact</h1>
+              <h1 className="font-serif text-5xl sm:text-6xl font-bold text-slate-900">
+                {t("contact_heading")}
+              </h1>
               <span className="edge-mark mt-7" />
               <p className="mt-7 text-base sm:text-lg text-slate-600 leading-relaxed">
-                Pentru o sculptură monumentală, un bust omagial, o piesă de atelier sau un trofeu
-                metalic unicat: apelați direct sau completați formularul de mai jos.
+                {t("contact_sub")}
               </p>
             </div>
           </div>
@@ -74,58 +72,42 @@ export default function ContactPage() {
               {/* DIRECT LINES */}
               <ScrollReveal className="lg:col-span-4">
                 <h2 className="font-serif text-3xl font-bold text-slate-900 pb-5 border-b border-slate-900">
-                  Legătură directă
+                  {t("contact_direct")}
                 </h2>
 
                 <dl className="text-sm">
+                  {/* The Telefon row is withheld until artistInfo.phone holds a
+                      real number; a listed line that nobody answers is worse
+                      than no listed line. Restore from git history. */}
                   <div className="py-5 border-b border-slate-200">
-                    <dt className="text-[11px] uppercase tracking-[0.16em] text-slate-500">
-                      Telefon
-                    </dt>
+                    <dt className="text-[11px] uppercase tracking-[0.16em] text-slate-500 font-semibold">Email</dt>
                     <dd className="mt-2">
                       <a
-                        href={`tel:${ARTIST_INFO.phone}`}
-                        className="font-mono text-lg text-slate-900 hover:text-amber-800 transition-colors inline-flex items-center gap-2"
-                      >
-                        <Phone className="h-4 w-4 text-amber-700" />
-                        <span>{ARTIST_INFO.phone}</span>
-                      </a>
-                      <p className="mt-2 text-xs text-slate-600 leading-relaxed">
-                        Pentru consultanță rapidă privind o comisie sau disponibilitatea lucrărilor
-                        de atelier.
-                      </p>
-                    </dd>
-                  </div>
-
-                  <div className="py-5 border-b border-slate-200">
-                    <dt className="text-[11px] uppercase tracking-[0.16em] text-slate-500">Email</dt>
-                    <dd className="mt-2">
-                      <a
-                        href={`mailto:${ARTIST_INFO.email}`}
+                        href={`mailto:${artistInfo.email}`}
                         className="font-mono text-sm text-slate-900 hover:text-amber-800 transition-colors inline-flex items-center gap-2 break-all"
                       >
                         <Mail className="h-4 w-4 text-amber-700 shrink-0" />
-                        <span>{ARTIST_INFO.email}</span>
+                        <span>{artistInfo.email}</span>
                       </a>
                       <p className="mt-2 text-xs text-slate-600 leading-relaxed">
-                        Pentru detalii tehnice, schițe sau caiete de sarcini.
+                        {t("contact_email_sub")}
                       </p>
                     </dd>
                   </div>
 
                   <div className="py-5 border-b border-slate-200">
-                    <dt className="text-[11px] uppercase tracking-[0.16em] text-slate-500">
-                      Atelier
+                    <dt className="text-[11px] uppercase tracking-[0.16em] text-slate-500 font-semibold">
+                      {t("contact_studio")}
                     </dt>
-                    <dd className="mt-2 text-slate-800">{ARTIST_INFO.location}</dd>
+                    <dd className="mt-2 text-slate-800">{artistInfo.location}</dd>
                   </div>
 
                   <div className="py-5 border-b border-slate-200">
-                    <dt className="text-[11px] uppercase tracking-[0.16em] text-slate-500">
-                      Timp de răspuns
+                    <dt className="text-[11px] uppercase tracking-[0.16em] text-slate-500 font-semibold">
+                      {t("contact_response_time")}
                     </dt>
                     <dd className="mt-2 text-slate-800">
-                      Mesajele sunt verificate zilnic; răspunsul vine de regulă în 24–48 de ore.
+                      {t("contact_response_val")}
                     </dd>
                   </div>
                 </dl>
@@ -134,11 +116,10 @@ export default function ContactPage() {
               {/* FORM */}
               <ScrollReveal delay={0.08} className="lg:col-span-8">
                 <h2 className="font-serif text-3xl font-bold text-slate-900 pb-5 border-b border-slate-900">
-                  Formular de solicitare
+                  {t("contact_form_heading")}
                 </h2>
                 <p className="mt-5 text-sm text-slate-600 leading-relaxed">
-                  Câmpurile de mai jos compun un mesaj structurat pe care îl deschidem în aplicația
-                  dumneavoastră de email, gata de trimis.
+                  {t("contact_form_sub")}
                 </p>
 
                 {opened && (
@@ -148,17 +129,9 @@ export default function ContactPage() {
                   >
                     <span className="h-px w-8 bg-amber-500 shrink-0 mt-3" />
                     <div className="text-sm">
-                      <strong className="block font-semibold">Mesajul este pregătit.</strong>
+                      <strong className="block font-semibold">{t("contact_form_status_ready")}</strong>
                       <span className="text-slate-300 mt-1 block">
-                        Aplicația de email s-a deschis cu mesajul precompletat. Dacă nu s-a deschis,
-                        scrieți direct la{" "}
-                        <a
-                          href={`mailto:${ARTIST_INFO.email}`}
-                          className="text-white underline underline-offset-4 break-all"
-                        >
-                          {ARTIST_INFO.email}
-                        </a>
-                        .
+                        {t("contact_form_status_sub")}
                       </span>
                     </div>
                   </div>
@@ -167,8 +140,8 @@ export default function ContactPage() {
                 <form onSubmit={handleSubmit} className="mt-8 space-y-6">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div className="space-y-2">
-                      <Label htmlFor="name" className="text-[11px] uppercase tracking-[0.14em] text-slate-600">
-                        Nume *
+                      <Label htmlFor="name" className="text-[11px] uppercase tracking-[0.14em] text-slate-600 font-semibold">
+                        {t("contact_field_name")}
                       </Label>
                       <Input
                         id="name"
@@ -176,14 +149,14 @@ export default function ContactPage() {
                         onChange={(e) => setName(e.target.value)}
                         required
                         autoComplete="name"
-                        placeholder="Popescu Ion"
+                        placeholder={t("contact_placeholder_name")}
                         className={fieldClass}
                       />
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="email" className="text-[11px] uppercase tracking-[0.14em] text-slate-600">
-                        Email *
+                      <Label htmlFor="email" className="text-[11px] uppercase tracking-[0.14em] text-slate-600 font-semibold">
+                        {t("contact_field_email")}
                       </Label>
                       <Input
                         id="email"
@@ -192,7 +165,7 @@ export default function ContactPage() {
                         onChange={(e) => setEmail(e.target.value)}
                         required
                         autoComplete="email"
-                        placeholder="nume@domeniu.ro"
+                        placeholder={t("contact_placeholder_email")}
                         className={fieldClass}
                       />
                     </div>
@@ -200,8 +173,8 @@ export default function ContactPage() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div className="space-y-2">
-                      <Label htmlFor="phone" className="text-[11px] uppercase tracking-[0.14em] text-slate-600">
-                        Telefon (opțional)
+                      <Label htmlFor="phone" className="text-[11px] uppercase tracking-[0.14em] text-slate-600 font-semibold">
+                        {t("contact_field_phone")}
                       </Label>
                       <Input
                         id="phone"
@@ -209,51 +182,51 @@ export default function ContactPage() {
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
                         autoComplete="tel"
-                        placeholder="07xx xxx xxx"
-                        className={`${fieldClass} font-mono`}
+                        placeholder={t("contact_placeholder_phone")}
+                        className={fieldClass}
                       />
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="inquiry-type" className="text-[11px] uppercase tracking-[0.14em] text-slate-600">
-                        Tipul solicitării *
+                      <Label htmlFor="inquiryType" className="text-[11px] uppercase tracking-[0.14em] text-slate-600 font-semibold">
+                        {t("contact_field_type")}
                       </Label>
-                      <Select value={inquiryType} onValueChange={setInquiryType}>
-                        <SelectTrigger id="inquiry-type" className={`${fieldClass} w-full`}>
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent className="bg-white border-slate-300 text-slate-800 text-sm">
-                          {INQUIRY_TYPES.map((t) => (
-                            <SelectItem key={t.value} value={t.value}>
-                              {t.label}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
+                      <select
+                        id="inquiryType"
+                        value={inquiryType}
+                        onChange={(e) => setInquiryType(e.target.value)}
+                        className={`${fieldClass} w-full px-3 border rounded-none focus:outline-none focus:border-slate-900`}
+                      >
+                        {inquiryTypes.map((type) => (
+                          <option key={type.value} value={type.value}>
+                            {type.label}
+                          </option>
+                        ))}
+                      </select>
                     </div>
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="message" className="text-[11px] uppercase tracking-[0.14em] text-slate-600">
-                      Detaliile proiectului *
+                    <Label htmlFor="message" className="text-[11px] uppercase tracking-[0.14em] text-slate-600 font-semibold">
+                      {t("contact_field_message")}
                     </Label>
                     <Textarea
                       id="message"
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
                       required
-                      placeholder="Descrieți pe scurt proiectul, dimensiunile dorite, materialul (inox, bronz, piatră) sau întrebarea dumneavoastră."
                       rows={6}
+                      placeholder={t("contact_placeholder_message")}
                       className="bg-white border-slate-300 text-sm text-slate-900 placeholder:text-slate-500 focus-visible:border-slate-900 focus-visible:ring-0"
                     />
                   </div>
 
                   <button
                     type="submit"
-                    className="group h-12 w-full sm:w-auto pl-6 pr-1 bg-slate-900 hover:bg-slate-800 text-white font-semibold text-[11px] uppercase tracking-[0.14em] inline-flex items-center justify-between gap-4 transition-colors"
+                    className="group h-12 px-8 bg-slate-900 hover:bg-slate-800 text-white font-semibold text-[11px] uppercase tracking-[0.14em] inline-flex items-center gap-4 transition-colors"
                   >
-                    <span>Deschide mesajul în email</span>
-                    <span className="w-10 h-10 bg-amber-700 flex items-center justify-center shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+                    <span>{t("contact_submit_btn")}</span>
+                    <span className="w-8 h-8 bg-amber-700 flex items-center justify-center transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
                       <ArrowUpRight className="h-4 w-4" />
                     </span>
                   </button>
