@@ -46,50 +46,86 @@
   stay light in both themes.
 */
 .dark {
-  --color-slate-50: oklch(0.185 0.008 250);
-  --color-slate-100: oklch(0.225 0.009 250);
-  --color-slate-200: oklch(0.288 0.011 250);
-  --color-slate-300: oklch(0.35 0.012 250);
-  --color-slate-400: oklch(0.49 0.013 250);
-  --color-slate-500: oklch(0.63 0.012 250);
-  --color-slate-600: oklch(0.71 0.01 250);
-  --color-slate-700: oklch(0.8 0.008 250);
-  --color-slate-800: oklch(0.895 0.005 250);
-  --color-slate-900: oklch(0.955 0.003 100);
+  /*
+    Architectural Night Gallery:
+    Deep obsidian canvas, elevated charcoal gallery plates, bright alabaster typography,
+    glowing patina bronze accents, dark slate hairline borders.
+  */
 
-  --color-amber-50: oklch(0.3 0.035 55);
-  --color-amber-100: oklch(0.345 0.045 56);
-  --color-amber-200: oklch(0.405 0.055 58);
-  --color-amber-300: oklch(0.485 0.066 60);
-  --color-amber-400: oklch(0.6 0.075 63);
-  --color-amber-500: oklch(0.67 0.078 66);
-  --color-amber-600: oklch(0.715 0.076 68);
-  --color-amber-700: oklch(0.765 0.07 70);
-  --color-amber-800: oklch(0.83 0.055 72);
-  --color-amber-900: oklch(0.89 0.038 74);
+  /* Base Slate Scale for Dark Mode */
+  --color-slate-50: oklch(0.12 0.008 250);   /* Canvas background: deep night gallery floor */
+  --color-slate-100: oklch(0.19 0.01 250);   /* Secondary surface & image mounts */
+  --color-slate-200: oklch(0.25 0.01 250);   /* Hairline slate border */
+  --color-slate-300: oklch(0.32 0.012 250);  /* Medium slate border */
+  --color-slate-400: oklch(0.44 0.012 250);  /* Hover / active border */
 
-  /* Card/plate surface, one step above the hall floor. */
-  --color-white: oklch(0.212 0.009 250);
+  /* Typography on Dark Surfaces */
+  --color-slate-500: oklch(0.64 0.01 250);   /* Captions & metadata text */
+  --color-slate-600: oklch(0.78 0.008 250);  /* Body paragraph text */
+  --color-slate-700: oklch(0.86 0.006 250);  /* Subheading text */
+  --color-slate-800: oklch(0.92 0.004 100);  /* Emphasized subhead text */
+  --color-slate-900: oklch(0.97 0.003 100);  /* Headings & primary typography */
 
-  --background: oklch(0.168 0.008 250);
-  --foreground: oklch(0.955 0.003 100);
-  --card: oklch(0.212 0.009 250);
-  --card-foreground: oklch(0.955 0.003 100);
-  --popover: oklch(0.212 0.009 250);
-  --popover-foreground: oklch(0.955 0.003 100);
-  --primary: oklch(0.955 0.003 100);
-  --primary-foreground: oklch(0.185 0.008 250);
-  --secondary: oklch(0.225 0.009 250);
-  --secondary-foreground: oklch(0.895 0.005 250);
-  --muted: oklch(0.225 0.009 250);
-  --muted-foreground: oklch(0.63 0.012 250);
-  --accent: oklch(0.715 0.076 68);
-  --accent-foreground: oklch(0.185 0.008 250);
-  --border: oklch(0.288 0.011 250);
-  --input: oklch(0.35 0.012 250);
-  --ring: oklch(0.765 0.07 70);
+  /* Patina Bronze (glowing warmly on dark obsidian) */
+  --color-amber-50: oklch(0.25 0.03 55);
+  --color-amber-100: oklch(0.30 0.04 56);
+  --color-amber-200: oklch(0.38 0.05 58);
+  --color-amber-300: oklch(0.48 0.06 60);
+  --color-amber-400: oklch(0.60 0.07 63);
+  --color-amber-500: oklch(0.72 0.07 66);
+  --color-amber-600: oklch(0.68 0.08 65);
+  --color-amber-700: oklch(0.62 0.08 64);
+  --color-amber-800: oklch(0.76 0.07 68);    /* Amber text reads brighter on dark */
+  --color-amber-900: oklch(0.84 0.05 72);
+
+  /* Semantic UI Tokens for Dark Mode */
+  --background: oklch(0.12 0.008 250);
+  --foreground: oklch(0.97 0.003 100);
+  --card: oklch(0.17 0.009 250);
+  --card-foreground: oklch(0.97 0.003 100);
+  --popover: oklch(0.17 0.009 250);
+  --popover-foreground: oklch(0.97 0.003 100);
+  --primary: oklch(0.97 0.003 100);
+  --primary-foreground: oklch(0.12 0.008 250);
+  --secondary: oklch(0.19 0.01 250);
+  --secondary-foreground: oklch(0.92 0.004 100);
+  --muted: oklch(0.19 0.01 250);
+  --muted-foreground: oklch(0.64 0.01 250);
+  --accent: oklch(0.62 0.08 64);
+  --accent-foreground: oklch(0.97 0.003 100);
+  --border: oklch(0.25 0.01 250);
+  --input: oklch(0.25 0.01 250);
+  --ring: oklch(0.62 0.08 64);
 
   color-scheme: dark;
+}
+
+/*
+  Dark Mode Overrides for Hardcoded Utility Classes:
+  Ensures solid dark surfaces (bg-slate-900 buttons/quote section), white text,
+  and elevated plates (bg-white) adjust properly in dark mode without going white.
+*/
+.dark .bg-white {
+  background-color: oklch(0.17 0.009 250);
+}
+.dark .bg-white\/95 {
+  background-color: oklch(0.17 0.009 250 / 0.95);
+}
+.dark .bg-slate-900 {
+  background-color: oklch(0.22 0.01 250);
+}
+.dark .hover\:bg-slate-800:hover {
+  background-color: oklch(0.28 0.012 250);
+}
+.dark .border-slate-900 {
+  border-color: oklch(0.38 0.01 250);
+}
+.dark .text-white {
+  color: oklch(1 0 0);
+}
+.dark select option {
+  background-color: oklch(0.17 0.009 250);
+  color: oklch(0.97 0.003 100);
 }
 
 :root {
