@@ -38,47 +38,13 @@
 }
 
 /*
-  Night gallery. The site is painted in raw slate/amber/white utilities rather
-  than semantic tokens, so dark mode inverts the ramps at the source instead of
-  adding a dark: variant to every element. Same lighting logic, lamps reversed:
-  limestone wall becomes a dark hall, bronze reads brighter against it.
-  ponytail: ramp inversion, move to semantic tokens if a surface ever needs to
-  stay light in both themes.
+  Architectural Night Gallery (Dark Mode):
+  Direct surface and typography overrides when .dark is active on <html>.
+  Never redefine --color-slate-900 or --color-white at the source, because
+  Tailwind compiles bg-slate-900 to var(--color-slate-900), which would
+  turn buttons, CTAs, and dark quote blocks bright white!
 */
 .dark {
-  /*
-    Architectural Night Gallery:
-    Deep obsidian canvas, elevated charcoal gallery plates, bright alabaster typography,
-    glowing patina bronze accents, dark slate hairline borders.
-  */
-
-  /* Base Slate Scale for Dark Mode */
-  --color-slate-50: oklch(0.12 0.008 250);   /* Canvas background: deep night gallery floor */
-  --color-slate-100: oklch(0.19 0.01 250);   /* Secondary surface & image mounts */
-  --color-slate-200: oklch(0.25 0.01 250);   /* Hairline slate border */
-  --color-slate-300: oklch(0.32 0.012 250);  /* Medium slate border */
-  --color-slate-400: oklch(0.44 0.012 250);  /* Hover / active border */
-
-  /* Typography on Dark Surfaces */
-  --color-slate-500: oklch(0.64 0.01 250);   /* Captions & metadata text */
-  --color-slate-600: oklch(0.78 0.008 250);  /* Body paragraph text */
-  --color-slate-700: oklch(0.86 0.006 250);  /* Subheading text */
-  --color-slate-800: oklch(0.92 0.004 100);  /* Emphasized subhead text */
-  --color-slate-900: oklch(0.97 0.003 100);  /* Headings & primary typography */
-
-  /* Patina Bronze (glowing warmly on dark obsidian) */
-  --color-amber-50: oklch(0.25 0.03 55);
-  --color-amber-100: oklch(0.30 0.04 56);
-  --color-amber-200: oklch(0.38 0.05 58);
-  --color-amber-300: oklch(0.48 0.06 60);
-  --color-amber-400: oklch(0.60 0.07 63);
-  --color-amber-500: oklch(0.72 0.07 66);
-  --color-amber-600: oklch(0.68 0.08 65);
-  --color-amber-700: oklch(0.62 0.08 64);
-  --color-amber-800: oklch(0.76 0.07 68);    /* Amber text reads brighter on dark */
-  --color-amber-900: oklch(0.84 0.05 72);
-
-  /* Semantic UI Tokens for Dark Mode */
   --background: oklch(0.12 0.008 250);
   --foreground: oklch(0.97 0.003 100);
   --card: oklch(0.17 0.009 250);
@@ -100,29 +66,64 @@
   color-scheme: dark;
 }
 
-/*
-  Dark Mode Overrides for Hardcoded Utility Classes:
-  Ensures solid dark surfaces (bg-slate-900 buttons/quote section), white text,
-  and elevated plates (bg-white) adjust properly in dark mode without going white.
-*/
+/* Canvas & Page Wrapper */
+html.dark body,
+.dark .bg-slate-50 {
+  background-color: oklch(0.12 0.008 250) !important;
+}
+
+/* Cards, Header, Footer & Elevated Plates */
 .dark .bg-white {
-  background-color: oklch(0.17 0.009 250);
+  background-color: oklch(0.17 0.009 250) !important;
 }
 .dark .bg-white\/95 {
-  background-color: oklch(0.17 0.009 250 / 0.95);
+  background-color: oklch(0.17 0.009 250 / 0.95) !important;
 }
+
+/* Secondary Controls & Mount Containers */
+.dark .bg-slate-100 {
+  background-color: oklch(0.20 0.01 250) !important;
+}
+
+/* Primary Dark Buttons, Quote Blocks & Stamp Badges */
 .dark .bg-slate-900 {
-  background-color: oklch(0.22 0.01 250);
+  background-color: oklch(0.22 0.01 250) !important;
 }
 .dark .hover\:bg-slate-800:hover {
-  background-color: oklch(0.28 0.012 250);
+  background-color: oklch(0.28 0.012 250) !important;
 }
-.dark .border-slate-900 {
-  border-color: oklch(0.38 0.01 250);
+
+/* Typography on Dark Surfaces */
+.dark .text-slate-900,
+.dark .text-slate-800 {
+  color: oklch(0.97 0.003 100) !important;
+}
+.dark .text-slate-700,
+.dark .text-slate-600 {
+  color: oklch(0.78 0.008 250) !important;
+}
+.dark .text-slate-500 {
+  color: oklch(0.64 0.01 250) !important;
 }
 .dark .text-white {
-  color: oklch(1 0 0);
+  color: #ffffff !important;
 }
+.dark .text-amber-800,
+.dark .text-amber-700 {
+  color: oklch(0.76 0.07 68) !important;
+}
+
+/* Hairline Borders */
+.dark .border-slate-200,
+.dark .border-slate-100,
+.dark .border-slate-300,
+.dark .border-slate-400 {
+  border-color: oklch(0.25 0.01 250) !important;
+}
+.dark .border-slate-900 {
+  border-color: oklch(0.38 0.01 250) !important;
+}
+
 .dark select option {
   background-color: oklch(0.17 0.009 250);
   color: oklch(0.97 0.003 100);
