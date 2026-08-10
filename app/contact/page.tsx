@@ -10,7 +10,7 @@ import { Textarea } from "@/components/ui/textarea"
 import ScrollReveal from "@/components/scroll-reveal"
 import { getArtistInfo } from "@/lib/data/artist-data"
 import { useLanguage } from "@/lib/context/language-context"
-import { Mail, ArrowUpRight } from "lucide-react"
+import { Mail, ArrowUpRight, Check, AlertCircle, Loader2 } from "lucide-react"
 
 const fieldClass =
   "h-11 bg-white border-slate-300 text-sm text-slate-900 placeholder:text-slate-500 focus-visible:border-slate-900 focus-visible:ring-0"
@@ -24,7 +24,8 @@ export default function ContactPage() {
   const [phone, setPhone] = useState("")
   const [inquiryType, setInquiryType] = useState<string>("commission_monumental")
   const [message, setMessage] = useState("")
-  const [opened, setOpened] = useState(false)
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle")
+  const [errorMessage, setErrorMessage] = useState("")
 
   const inquiryTypes = [
     { value: "commission_monumental", label: t("contact_type_monumental") },
@@ -34,17 +35,42 @@ export default function ContactPage() {
     { value: "general", label: t("contact_type_general") },
   ]
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setStatus("sending")
+    setErrorMessage("")
 
     const label = inquiryTypes.find((t) => t.value === inquiryType)?.label ?? inquiryType
-    const subject = encodeURIComponent(`Solicitare website: ${label} — ${name}`)
-    const body = encodeURIComponent(
-      `Nume: ${name}\nEmail: ${email}\nTelefon: ${phone || "nespecificat"}\nTip solicitare: ${label}\n\nMesaj:\n${message}`,
-    )
 
-    window.location.href = `mailto:${artistInfo.email}?subject=${subject}&body=${body}`
-    setOpened(true)
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          email,
+          phone,
+          inquiryType: label,
+          message,
+        }),
+      })
+
+      const data = await res.json()
+
+      if (!res.ok || data.error) {
+        setStatus("error")
+        setErrorMessage(data.error || t("contact_form_status_error_sub"))
+      } else {
+        setStatus("success")
+        setName("")
+        setEmail("")
+        setPhone("")
+        setMessage("")
+      }
+    } catch {
+      setStatus("error")
+      setErrorMessage(t("contact_form_status_error_sub"))
+    }
   }
 
   return (
@@ -76,9 +102,6 @@ export default function ContactPage() {
                 </h2>
 
                 <dl className="text-sm">
-                  {/* The Telefon row is withheld until artistInfo.phone holds a
-                      real number; a listed line that nobody answers is worse
-                      than no listed line. Restore from git history. */}
                   <div className="py-5 border-b border-slate-200">
                     <dt className="text-[11px] uppercase tracking-[0.16em] text-slate-500 font-semibold">Email</dt>
                     <dd className="mt-2">
@@ -122,16 +145,41 @@ export default function ContactPage() {
                   {t("contact_form_sub")}
                 </p>
 
-                {opened && (
+                {status === "sending" && (
                   <div
                     role="status"
-                    className="mt-6 bg-slate-900 text-white p-5 flex items-start gap-4"
+                    className="mt-6 bg-slate-900 text-white p-5 flex items-center gap-4"
                   >
-                    <span className="h-px w-8 bg-amber-500 shrink-0 mt-3" />
+                    <Loader2 className="h-5 w-5 text-amber-500 animate-spin shrink-0" />
+                    <div className="text-sm font-semibold">{t("contact_form_status_sending")}</div>
+                  </div>
+                )}
+
+                {status === "success" && (
+                  <div
+                    role="status"
+                    className="mt-6 bg-slate-900 text-white p-5 flex items-start gap-4 border-l-4 border-amber-500"
+                  >
+                    <Check className="h-5 w-5 text-amber-500 shrink-0 mt-0.5" />
                     <div className="text-sm">
-                      <strong className="block font-semibold">{t("contact_form_status_ready")}</strong>
+                      <strong className="block font-semibold">{t("contact_form_status_success")}</strong>
                       <span className="text-slate-300 mt-1 block">
-                        {t("contact_form_status_sub")}
+                        {t("contact_form_status_success_sub")}
+                      </span>
+                    </div>
+                  </div>
+                )}
+
+                {status === "error" && (
+                  <div
+                    role="status"
+                    className="mt-6 bg-rose-950 text-white p-5 flex items-start gap-4 border-l-4 border-rose-500"
+                  >
+                    <AlertCircle className="h-5 w-5 text-rose-400 shrink-0 mt-0.5" />
+                    <div className="text-sm">
+                      <strong className="block font-semibold">{t("contact_form_status_error")}</strong>
+                      <span className="text-rose-200 mt-1 block">
+                        {errorMessage || t("contact_form_status_error_sub")}
                       </span>
                     </div>
                   </div>
@@ -223,11 +271,16 @@ export default function ContactPage() {
 
                   <button
                     type="submit"
-                    className="group h-12 px-8 bg-slate-900 hover:bg-slate-800 text-white font-semibold text-[11px] uppercase tracking-[0.14em] inline-flex items-center gap-4 transition-colors"
+                    disabled={status === "sending"}
+                    className="group h-12 px-8 bg-slate-900 hover:bg-slate-800 disabled:bg-slate-500 text-white font-semibold text-[11px] uppercase tracking-[0.14em] inline-flex items-center gap-4 transition-colors disabled:cursor-not-allowed"
                   >
-                    <span>{t("contact_submit_btn")}</span>
+                    <span>{status === "sending" ? t("contact_submitting_btn") : t("contact_submit_btn")}</span>
                     <span className="w-8 h-8 bg-amber-700 flex items-center justify-center transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
-                      <ArrowUpRight className="h-4 w-4" />
+                      {status === "sending" ? (
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                      ) : (
+                        <ArrowUpRight className="h-4 w-4" />
+                      )}
                     </span>
                   </button>
                 </form>
@@ -241,3 +294,4 @@ export default function ContactPage() {
     </div>
   )
 }
+

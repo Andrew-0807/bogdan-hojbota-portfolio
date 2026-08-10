@@ -80,9 +80,12 @@ html.dark body,
   background-color: oklch(0.17 0.009 250 / 0.95) !important;
 }
 
-/* Secondary Controls & Mount Containers */
+/* Secondary Controls, Mount Containers & Hover Fills */
 .dark .bg-slate-100 {
   background-color: oklch(0.20 0.01 250) !important;
+}
+.dark .bg-slate-200\/60:hover {
+  background-color: oklch(0.25 0.01 250 / 0.6) !important;
 }
 
 /* Primary Dark Buttons, Quote Blocks & Stamp Badges */
@@ -102,28 +105,45 @@ html.dark body,
 .dark .text-slate-600 {
   color: oklch(0.78 0.008 250) !important;
 }
-.dark .text-slate-500 {
+.dark .text-slate-500,
+.dark .text-slate-400 {
   color: oklch(0.64 0.01 250) !important;
 }
 .dark .text-white {
   color: #ffffff !important;
 }
 .dark .text-amber-800,
-.dark .text-amber-700 {
+.dark .text-amber-700,
+.dark .text-amber-600 {
   color: oklch(0.76 0.07 68) !important;
 }
 
-/* Hairline Borders */
+/* Hairline Borders & Dividers */
 .dark .border-slate-200,
 .dark .border-slate-100,
 .dark .border-slate-300,
-.dark .border-slate-400 {
+.dark .border-slate-400,
+.dark .border-slate-200\/90 {
   border-color: oklch(0.25 0.01 250) !important;
 }
 .dark .border-slate-900 {
   border-color: oklch(0.38 0.01 250) !important;
 }
 
+.dark .divide-slate-200 > :not([hidden]) ~ :not([hidden]),
+.dark .divide-slate-100 > :not([hidden]) ~ :not([hidden]) {
+  border-color: oklch(0.25 0.01 250) !important;
+}
+.dark .divide-slate-900 > :not([hidden]) ~ :not([hidden]) {
+  border-color: oklch(0.38 0.01 250) !important;
+}
+
+/* Timeline dot rings */
+.dark .ring-slate-50 {
+  box-shadow: 0 0 0 4px oklch(0.12 0.008 250) !important;
+}
+
+/* Form inputs & select dropdowns */
 .dark select option {
   background-color: oklch(0.17 0.009 250);
   color: oklch(0.97 0.003 100);

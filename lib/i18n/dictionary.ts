@@ -107,6 +107,12 @@ export type DictionaryKey =
   | "contact_form_sub"
   | "contact_form_status_ready"
   | "contact_form_status_sub"
+  | "contact_form_status_sending"
+  | "contact_form_status_success"
+  | "contact_form_status_success_sub"
+  | "contact_form_status_error"
+  | "contact_form_status_error_sub"
+  | "contact_submitting_btn"
   | "contact_field_name"
   | "contact_field_email"
   | "contact_field_phone"
@@ -385,15 +391,26 @@ export const dictionary: Record<DictionaryKey, { ro: string; en: string }> = {
     ro: "Mesajele sunt verificate zilnic; răspunsul vine de regulă în 24–48 de ore.",
     en: "Inquiries are checked daily; responses are typically sent within 24–48 hours.",
   },
-  contact_form_heading: { ro: "Formular de solicitare", en: "Inquiry Form" },
+  contact_form_heading: { ro: "Solicitare Comisie", en: "Commission Inquiry" },
   contact_form_sub: {
-    ro: "Câmpurile de mai jos compun un mesaj structurat pe care îl deschidem în aplicația dumneavoastră de email, gata de trimis.",
-    en: "The fields below construct a formatted email draft opened directly in your email client.",
+    ro: "Completați formularul de mai jos pentru a trimite o solicitare de comision direct sculptorului Bogdan Severin Hojbotă.",
+    en: "Complete the form below to submit a commission inquiry directly to sculptor Bogdan Severin Hojbotă.",
   },
   contact_form_status_ready: { ro: "Mesajul este pregătit.", en: "Email draft ready." },
   contact_form_status_sub: {
     ro: "Aplicația de email s-a deschis cu mesajul precompletat. Dacă nu s-a deschis, scrieți direct la contact@bogdanhojbota.ro.",
     en: "Your email application has opened with the pre-filled inquiry. If not, write directly to contact@bogdanhojbota.ro.",
+  },
+  contact_form_status_sending: { ro: "Se trimite solicitarea...", en: "Sending inquiry..." },
+  contact_form_status_success: { ro: "Solicitarea a fost trimisă cu succes!", en: "Inquiry submitted successfully!" },
+  contact_form_status_success_sub: {
+    ro: "Vă mulțumim! Mesajul dumneavoastră a fost recepționat. Veți primi un răspuns în cel mai scurt timp.",
+    en: "Thank you! Your message has been received. You will receive a response shortly.",
+  },
+  contact_form_status_error: { ro: "Trimiterea a eșuat.", en: "Submission failed." },
+  contact_form_status_error_sub: {
+    ro: "A apărut o problemă la trimitere. Vă rugăm să reîncercați sau să scrieți direct la contact@bogdanhojbota.ro.",
+    en: "An error occurred while sending. Please try again or email contact@bogdanhojbota.ro directly.",
   },
   contact_field_name: { ro: "Nume *", en: "Name *" },
   contact_field_email: { ro: "Email *", en: "Email *" },
@@ -410,7 +427,8 @@ export const dictionary: Record<DictionaryKey, { ro: string; en: string }> = {
     ro: "Descrieți amplasamentul, dimensiunile dorite sau materialul preferat (inox, bronz, piatră)...",
     en: "Describe intended site, target dimensions, or preferred medium (stainless steel, bronze, stone)...",
   },
-  contact_submit_btn: { ro: "Deschide mesajul de email", en: "Open Email Draft" },
+  contact_submit_btn: { ro: "Trimite solicitarea", en: "Send Inquiry" },
+  contact_submitting_btn: { ro: "Se trimite...", en: "Sending..." },
   contact_type_monumental: {
     ro: "Sculptură monumentală și spațiu public",
     en: "Monumental & Public Space Sculpture",
