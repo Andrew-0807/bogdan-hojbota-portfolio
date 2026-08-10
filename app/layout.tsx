@@ -4,6 +4,7 @@ import { IBM_Plex_Sans, Cormorant_Garamond, IBM_Plex_Mono } from "next/font/goog
 import { Analytics } from "@vercel/analytics/next"
 import { ARTIST_INFO, SITE_URL } from "@/lib/data/artist-data"
 import { LanguageProvider } from "@/lib/context/language-context"
+import { ThemeProvider } from "@/components/theme-provider"
 import "./globals.css"
 
 // Engineering-neutral body voice: the "rigoare inginerească" behind the lyricism.
@@ -110,9 +111,15 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="ro" className={`${plex.variable} ${cormorant.variable} ${mono.variable}`}>
+    <html
+      lang="ro"
+      className={`${plex.variable} ${cormorant.variable} ${mono.variable}`}
+      suppressHydrationWarning
+    >
       <body className="font-sans antialiased bg-slate-50 text-slate-900 selection:bg-amber-700 selection:text-white">
-        <LanguageProvider>{children}</LanguageProvider>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
+          <LanguageProvider>{children}</LanguageProvider>
+        </ThemeProvider>
         <Analytics />
         <script
           type="application/ld+json"

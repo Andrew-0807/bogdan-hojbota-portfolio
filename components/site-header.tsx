@@ -9,6 +9,7 @@ import { useState } from "react"
 import { ARTIST_INFO } from "@/lib/data/artist-data"
 import { useLanguage } from "@/lib/context/language-context"
 import { LanguageToggle } from "@/components/language-toggle"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 export function SiteHeader() {
   const pathname = usePathname()
@@ -79,6 +80,7 @@ export function SiteHeader() {
             </a>
 
             <LanguageToggle />
+            <ThemeToggle />
 
             <Link
               href="/contact"
@@ -93,6 +95,7 @@ export function SiteHeader() {
 
           <div className="flex items-center gap-2 sm:hidden">
             <LanguageToggle />
+            <ThemeToggle />
             <button
               className="p-2 text-slate-700 hover:text-slate-900 transition-colors"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}

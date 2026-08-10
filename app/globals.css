@@ -35,6 +35,61 @@
   --color-slate-900: oklch(0.185 0.011 245);
 }
 
+/*
+  Night gallery. The site is painted in raw slate/amber/white utilities rather
+  than semantic tokens, so dark mode inverts the ramps at the source instead of
+  adding a dark: variant to every element. Same lighting logic, lamps reversed:
+  limestone wall becomes a dark hall, bronze reads brighter against it.
+  ponytail: ramp inversion, move to semantic tokens if a surface ever needs to
+  stay light in both themes.
+*/
+.dark {
+  --color-slate-50: oklch(0.185 0.008 250);
+  --color-slate-100: oklch(0.225 0.009 250);
+  --color-slate-200: oklch(0.288 0.011 250);
+  --color-slate-300: oklch(0.35 0.012 250);
+  --color-slate-400: oklch(0.49 0.013 250);
+  --color-slate-500: oklch(0.63 0.012 250);
+  --color-slate-600: oklch(0.71 0.01 250);
+  --color-slate-700: oklch(0.8 0.008 250);
+  --color-slate-800: oklch(0.895 0.005 250);
+  --color-slate-900: oklch(0.955 0.003 100);
+
+  --color-amber-50: oklch(0.3 0.035 55);
+  --color-amber-100: oklch(0.345 0.045 56);
+  --color-amber-200: oklch(0.405 0.055 58);
+  --color-amber-300: oklch(0.485 0.066 60);
+  --color-amber-400: oklch(0.6 0.075 63);
+  --color-amber-500: oklch(0.67 0.078 66);
+  --color-amber-600: oklch(0.715 0.076 68);
+  --color-amber-700: oklch(0.765 0.07 70);
+  --color-amber-800: oklch(0.83 0.055 72);
+  --color-amber-900: oklch(0.89 0.038 74);
+
+  /* Card/plate surface, one step above the hall floor. */
+  --color-white: oklch(0.212 0.009 250);
+
+  --background: oklch(0.168 0.008 250);
+  --foreground: oklch(0.955 0.003 100);
+  --card: oklch(0.212 0.009 250);
+  --card-foreground: oklch(0.955 0.003 100);
+  --popover: oklch(0.212 0.009 250);
+  --popover-foreground: oklch(0.955 0.003 100);
+  --primary: oklch(0.955 0.003 100);
+  --primary-foreground: oklch(0.185 0.008 250);
+  --secondary: oklch(0.225 0.009 250);
+  --secondary-foreground: oklch(0.895 0.005 250);
+  --muted: oklch(0.225 0.009 250);
+  --muted-foreground: oklch(0.63 0.012 250);
+  --accent: oklch(0.715 0.076 68);
+  --accent-foreground: oklch(0.185 0.008 250);
+  --border: oklch(0.288 0.011 250);
+  --input: oklch(0.35 0.012 250);
+  --ring: oklch(0.765 0.07 70);
+
+  color-scheme: dark;
+}
+
 :root {
   --background: oklch(0.978 0.003 100);
   --foreground: oklch(0.185 0.011 245);
@@ -97,8 +152,8 @@
     color-scheme: light;
   }
   body {
-    background-color: oklch(0.978 0.003 100);
-    color: oklch(0.185 0.011 245);
+    background-color: var(--background);
+    color: var(--foreground);
   }
 
   /* Square edges need a crisp, square focus mark. */
@@ -194,6 +249,16 @@
   .group:hover .specular::after,
   .specular:hover::after {
     transform: translate3d(120%, 0, 0);
+  }
+
+  /* A dark hall reflects less: same travelling light, a fraction of the glare. */
+  .dark .specular::after {
+    background: linear-gradient(
+      74deg,
+      transparent 42%,
+      rgba(255, 255, 255, 0.14) 50%,
+      transparent 58%
+    );
   }
 
   /* Muchie: the single accent mark, a cut bronze edge. */
