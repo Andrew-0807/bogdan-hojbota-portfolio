@@ -3,7 +3,7 @@
 ## Project Overview
 Official portfolio and commission website for **Prof. Univ. Dr. Bogdan Severin Hojbotă** (born 1954), master Romanian metal sculptor, former UNArte professor, and President of the UAPR Decorative Arts Branch.
 
-* **Primary Objective**: Drive inbound phone calls (`tel:+40722000000`) and email commission inquiries (`mailto:contact@bogdanhojbota.ro`) for monumental public sculptures, bronze portraits/busts, studio pieces, and metal trophies.
+* **Primary Objective**: Drive inbound email commission inquiries (`mailto:contact@bogdanhojbota.ro`) for monumental public sculptures, bronze portraits/busts, studio pieces, and metal trophies.
 
 ---
 
@@ -34,7 +34,7 @@ Official portfolio and commission website for **Prof. Univ. Dr. Bogdan Severin H
 * `/profil` — Academic biography, UNArte history, visual philosophy, awards.
 * `/galerie` & `/galerie/[id]` — Portfolio catalog with category filters + SSG detail pages for all 12 cataloged works.
 * `/cronologie` — Exhibition timeline & list view (1981–2025).
-* `/contact` — Direct phone click-to-call + mailto email submission form.
+* `/contact` — Direct mailto email submission form.
 
 ---
 

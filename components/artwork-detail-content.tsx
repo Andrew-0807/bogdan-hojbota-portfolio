@@ -10,6 +10,8 @@ import { getArtwork, getArtworks } from "@/lib/data/artist-data"
 import { useLanguage } from "@/lib/context/language-context"
 import { ArrowLeft, ArrowRight } from "lucide-react"
 
+import { ArtworkGallery } from "@/components/artwork-gallery"
+
 interface ArtworkDetailContentProps {
   id: string
 }
@@ -22,6 +24,13 @@ export function ArtworkDetailContent({ id }: ArtworkDetailContentProps) {
   if (!artwork) {
     notFound()
   }
+
+  const galleryImages = useMemo(() => {
+    if (artwork.images && artwork.images.length > 0) {
+      return artwork.images
+    }
+    return [artwork.image_url]
+  }, [artwork])
 
   const index = artworks.findIndex((item) => item.id === artwork.id)
   const others = [...artworks.slice(index + 1), ...artworks.slice(0, index)]
@@ -53,24 +62,16 @@ export function ArtworkDetailContent({ id }: ArtworkDetailContentProps) {
           </Link>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-16 gap-y-10 items-start mt-8">
-            {/* The work */}
-            <figure className="lg:col-span-7 group">
-              {/* The one place the work gets its full height. Contained in a
-                  4:5 mount so monuments keep their base and their sky. */}
-              <div className="specular relative aspect-[4/5] bg-slate-100 border border-slate-200">
-                <Image
-                  src={artwork.image_url}
-                  alt={`${artwork.title}, ${artwork.materials}, ${artwork.location}`}
-                  fill
-                  sizes="(min-width: 1024px) 58vw, 100vw"
-                  className="object-contain"
-                  priority
-                />
-              </div>
-              <figcaption className="pt-3 font-mono text-[11px] text-slate-500">
-                {t("detail_caption")}
-              </figcaption>
-            </figure>
+            {/* The work gallery */}
+            <div className="lg:col-span-7">
+              <ArtworkGallery
+                images={galleryImages}
+                title={artwork.title}
+                materials={artwork.materials}
+                year={artwork.year}
+                location={artwork.location}
+              />
+            </div>
 
             {/* Catalogue entry */}
             <div className="lg:col-span-5">

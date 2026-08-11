@@ -33,3 +33,5 @@ next-env.d.ts
 tmp/
 .vercel
 .env*
+/lucrari
+/public/lucrari-Edited

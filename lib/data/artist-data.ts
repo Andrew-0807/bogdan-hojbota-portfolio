@@ -1,3 +1,4 @@
+import lucrariImagesMap from "./lucrari-images.json"
 export type Language = "ro" | "en"
 
 export interface ArtworkData {
@@ -15,6 +16,8 @@ export interface ArtworkData {
   narrative: string
   narrative_en?: string
   image_url: string
+  folders?: string[]
+  images?: string[]
   featured: boolean
 }
 
@@ -66,7 +69,6 @@ export const ARTIST_INFO = {
   role: "Președintele Filialei de Arte Decorative București UAPR",
   role_en: "President of the Decorative Arts Branch Bucharest UAPR",
   birthYear: 1954,
-  phone: "+40 722 000 000",
   email: "contact@bogdanhojbota.ro",
   location: "București, România",
   location_en: "Bucharest, Romania",
@@ -105,233 +107,563 @@ export function getArtistInfo(lang: Language = "ro") {
 
 export const ARTWORKS: ArtworkData[] = [
   {
-    id: "strajer-al-apelor",
-    title: "Străjer al Apelor",
-    title_en: "Water Guardian",
-    year: 2022,
-    materials: "Metal / Oțel fasonat și sudat",
-    materials_en: "Metal / Formed and welded steel",
-    dimensions: "Sculptură monumentală de for public",
-    dimensions_en: "Monumental public sculpture",
-    category: "Sculptură Monumentală",
-    location: "Buzău (Simpozionul Internațional „Memoria Apei”)",
-    location_en: "Buzău (International Symposium “Memory of Water”)",
-    narrative:
-      "Proiectată ca o lucrare monumentală reprezentativă pentru ecologia spațiului urban, sculptura simbolizează misiunea de protecție și veghere asupra celei mai importante resurse ale planetei – apa. Artistul construiește din foi tectonice și muchii metalice o figură tutelară nonfigurativă. Liniile de forță verticale exprimă fermitate și vigilență, în timp ce spațiile goale lasă aerul și mediul înconjurător să treacă prin structura oțelului.",
-    narrative_en:
-      "Designed as a monumental public sculpture addressing urban ecology, this work symbolizes vigilance over water, Earth's vital resource. Constructed from tectonic steel plates and angular edges, the vertical lines express firmness, while spatial voids allow air and ambient light to pass through the steel structure.",
-    image_url: "/images/artworks/strajer-al-apelor.jpg",
-    featured: false,
+    "id": "strajer-al-apelor",
+    "title": "Străjer al Apelor (Monument Corten)",
+    "title_en": "Water Guardian (Corten Steel Monument)",
+    "year": 2022,
+    "materials": "Metal / Oțel Corten fasonat și sudat",
+    "materials_en": "Metal / Formed and welded Corten steel",
+    "dimensions": "Sculptură monumentală de for public",
+    "dimensions_en": "Monumental public sculpture",
+    "category": "Sculptură Monumentală",
+    "location": "Buzău (Simpozionul Internațional „Memoria Apei”)",
+    "location_en": "Buzău (International Symposium “Memory of Water”)",
+    "narrative": "Proiectată ca o lucrare monumentală reprezentativă pentru ecologia spațiului urban, sculptura simbolizează misiunea de protecție și veghere asupra celei mai importante resurse ale planetei – apa. Artistul construiește din foi tectonice și muchii metalice o figură tutelară nonfigurativă. Liniile de forță verticale exprimă fermitate și vigilență, în timp ce spațiile goale lasă aerul și mediul înconjurător să treacă prin structura oțelului.",
+    "narrative_en": "Designed as a monumental public sculpture addressing urban ecology, this work symbolizes vigilance over water, Earth’s vital resource. Constructed from tectonic steel plates and angular edges, the vertical lines express firmness, while spatial voids allow air and ambient light to pass through the steel structure.",
+    "image_url": "",
+    "folders": [
+      "11_Monument_Corten_Zbor_Parc",
+      "12_Fabricatie_Si_Montaj_Monument"
+    ],
+    "featured": true
   },
   {
-    id: "nelinistea-unui-cerc",
-    title: "Neliniștea unui cerc",
-    title_en: "Restlessness of a Circle",
-    year: 2022,
-    materials: "Oțel inoxidabil (inox) deformat la rece, debitat și finisat",
-    materials_en: "Cold-formed, cut, and hand-finished stainless steel",
-    dimensions: "67 x 68 x 30 cm",
-    dimensions_en: "67 x 68 x 30 cm",
-    category: "Sculptură de Atelier",
-    location: "Colecție privată / WIN Gallery, București",
-    location_en: "Private collection / WIN Gallery, Bucharest",
-    narrative:
-      "Neliniștea unui cerc este un exemplu emblematic pentru stăpânirea tehnologică a inoxului. Pornind de la forma geometrică perfectă a cercului, Bogdan Hojbotă introduce tensiune și mișcare prin torsionarea materialului. Suprafața metalului de o strălucire rece captează și reflectă mediul ambiental în volute dinamice, anulând impresia de masă compactă.",
-    narrative_en:
-      "Demonstrating command over stainless steel, this studio piece introduces dynamic tension into geometric circularity. By twisting cold-worked steel, the mirror-like metallic surface captures and refracts surrounding light, dismantling the perception of static mass.",
-    image_url: "/images/artworks/nelinistea-unui-cerc.png",
-    featured: true,
+    "id": "nelinistea-unui-cerc",
+    "title": "Neliniștea unui cerc (Orbită & Oval Mecanic)",
+    "title_en": "Restlessness of a Circle (Orbit & Mechanical Oval)",
+    "year": 2022,
+    "materials": "Oțel inoxidabil (inox) deformat la rece, debitat și finisat",
+    "materials_en": "Cold-formed, cut, and hand-finished stainless steel",
+    "dimensions": "67 x 68 x 30 cm",
+    "dimensions_en": "67 x 68 x 30 cm",
+    "category": "Sculptură de Atelier",
+    "location": "Colecție privată / WIN Gallery, București",
+    "location_en": "Private collection / WIN Gallery, Bucharest",
+    "narrative": "Neliniștea unui cerc este un exemplu emblematic pentru stăpânirea tehnologică a inoxului. Pornind de la forma geometrică perfectă a cercului, Bogdan Hojbotă introduce tensiune și mișcare prin torsionarea materialului. Suprafața metalului de o strălucire rece captează și reflectă mediul ambiental în volute dinamice, anulând impresia de masă compactă.",
+    "narrative_en": "Demonstrating command over stainless steel, this studio piece introduces dynamic tension into geometric circularity. By twisting cold-worked steel, the mirror-like metallic surface captures and refracts surrounding light, dismantling the perception of static mass.",
+    "image_url": "",
+    "folders": [
+      "10_Orbita_Inel_Inox",
+      "15_Oval_Mecanic_Inox",
+      "20_Seceta_Secera_Inox"
+    ],
+    "featured": true
   },
   {
-    id: "influorescenta",
-    title: "Influorescență",
-    title_en: "Influorescence",
-    year: 2020,
-    materials: "Marmură cioplită și șlefuită",
-    materials_en: "Carved and polished marble",
-    dimensions: "Sculptură monumentală ambientală",
-    dimensions_en: "Environmental monumental sculpture",
-    category: "Sculptură Monumentală",
-    location: "Craiova (Simpozionul Internațional „Drumuri Brâncușiene”)",
-    location_en: "Craiova (International Symposium “Brâncuși Paths”)",
-    narrative:
-      "Deși consacrat ca metalist, Hojbotă abordează cioplirea în marmură pentru a explora inflorescența și evoluția organică a formei. Lucrarea propune o expansiune a volumelor ce par să răsară din piatră, aducând un omagiu limbajului brâncușian al esențializării.",
-    narrative_en:
-      "Primarily known for metal sculpture, Hojbotă engages with direct marble carving to explore organic form and growth. The sculpture proposes a gentle expansion of volume emerging from stone, paying homage to the Brancusian tradition of essential form.",
-    image_url: "/images/artworks/influorescenta.jpg",
-    featured: true,
+    "id": "influorescenta",
+    "title": "Influorescență (Geneză – Monument în Piatră)",
+    "title_en": "Influorescence (Genesis – Stone Monument)",
+    "year": 2020,
+    "materials": "Marmură cioplită și șlefuită",
+    "materials_en": "Carved and polished marble",
+    "dimensions": "Sculptură monumentală ambientală",
+    "dimensions_en": "Environmental monumental sculpture",
+    "category": "Sculptură Monumentală",
+    "location": "Craiova (Simpozionul Internațional „Drumuri Brâncușiene”)",
+    "location_en": "Craiova (International Symposium “Brâncuși Paths”)",
+    "narrative": "Deși consacrat ca metalist, Hojbotă abordează cioplirea în marmură pentru a explora inflorescența și evoluția organică a formei. Lucrarea propune o expansiune a volumelor ce par să răsară din piatră, aducând un omagiu limbajului brâncușian al esențializării.",
+    "narrative_en": "Primarily known for metal sculpture, Hojbotă engages with direct marble carving to explore organic form and growth. The sculpture proposes a gentle expansion of volume emerging from stone, paying homage to the Brancusian tradition of essential form.",
+    "image_url": "",
+    "folders": [
+      "19_Geneza_Piatra_Monument"
+    ],
+    "featured": true
   },
   {
-    id: "trofeul-pietei-de-brokeraj",
-    title: "Trofeul Pieței de Brokeraj",
-    title_en: "Brokerage Market Trophy",
-    year: 2020,
-    materials: "Aliaj metalic prelucrat și finisat grafic",
-    materials_en: "Machined and graphic-finished metal alloy",
-    dimensions: "Design de trofeu simbolic",
-    dimensions_en: "Symbolic trophy design",
-    category: "Trofee & Design Metalic",
-    location: "Gala Premiilor XPRIMM ale Pieței de Brokeraj",
-    location_en: "XPRIMM Brokerage Market Awards Gala",
-    narrative:
-      "Demonstrează aplicabilitatea esteticii metalului în zona obiectului simbolic de prestigiu. Trofeul sintetizează ideile de performanță, echilibru și ascensiune, având caracteristicile minimalismului său sculptural.",
-    narrative_en:
-      "Translates sculptural minimalism into a prestigious symbolic award. The trophy synthesizes performance, balance, and ascension through clean geometric lines.",
-    image_url: "/images/artworks/trofeul-pietei-de-brokeraj.jpg",
-    featured: false,
+    "id": "trofeul-pietei-de-brokeraj",
+    "title": "Trofeul Pieței de Brokeraj (Victoria)",
+    "title_en": "Brokerage Market Trophy (Victoria)",
+    "year": 2020,
+    "materials": "Aliaj metalic prelucrat și finisat grafic",
+    "materials_en": "Machined and graphic-finished metal alloy",
+    "dimensions": "Design de trofeu simbolic",
+    "dimensions_en": "Symbolic trophy design",
+    "category": "Trofee & Design Metalic",
+    "location": "Gala Premiilor XPRIMM ale Pieței de Brokeraj",
+    "location_en": "XPRIMM Brokerage Market Awards Gala",
+    "narrative": "Demonstrează aplicabilitatea esteticii metalului în zona obiectului simbolic de prestigiu. Trofeul sintetizează ideile de performanță, echilibru și ascensiune, având caracteristicile minimalismului său sculptural.",
+    "narrative_en": "Translates sculptural minimalism into a prestigious symbolic award. The trophy synthesizes performance, balance, and ascension through clean geometric lines.",
+    "image_url": "",
+    "folders": [
+      "37_Trofeu_Victoria_Gala",
+      "36_Panou_Patrat_Compozitie"
+    ],
+    "featured": false
   },
   {
-    id: "bustul-vasile-voiculescu",
-    title: "Bustul scriitorului Vasile Voiculescu",
-    title_en: "Bust of Writer Vasile Voiculescu",
-    year: 2018,
-    materials: "Bronz turnat, patinat; soclu monumental din piatră",
-    materials_en: "Cast patinated bronze; monumental stone pedestal",
-    dimensions: "Monument comemorativ figurativ",
-    dimensions_en: "Figurative commemorative monument",
-    category: "Busturi & Portrete Comemorative",
-    location: "Parcul „Vasile Voiculescu”, Buzău",
-    location_en: "Vasile Voiculescu Park, Buzău",
-    narrative:
-      "O lucrare de sinteză portretistică ce dovedește versatilitatea sculptorului în registrul figurativ clasic. Artistul surprinde fizionomia și profilul spiritual ascetic al marelui poet și prozator Vasile Voiculescu cu o modelare sobră și plină de calitate.",
-    narrative_en:
-      "A portrait study illustrating the sculptor's mastery of classical figurative sculpture. The artist renders the features and spiritual gravity of writer Vasile Voiculescu with austere modeling and restraint.",
-    image_url: "/images/artworks/bustul-vasile-voiculescu.jpg",
-    featured: true,
+    "id": "bustul-vasile-voiculescu",
+    "title": "Bustul scriitorului Vasile Voiculescu (Portrete în Bronz)",
+    "title_en": "Bust of Writer Vasile Voiculescu (Bronze Portraits)",
+    "year": 2018,
+    "materials": "Bronz turnat, patinat; soclu monumental din piatră",
+    "materials_en": "Cast patinated bronze; monumental stone pedestal",
+    "dimensions": "Monument comemorativ figurativ",
+    "dimensions_en": "Figurative commemorative monument",
+    "category": "Busturi & Portrete Comemorative",
+    "location": "Parcul „Vasile Voiculescu”, Buzău",
+    "location_en": "Vasile Voiculescu Park, Buzău",
+    "narrative": "O lucrare de sinteză portretistică ce dovedește versatilitatea sculptorului în registrul figurativ clasic. Artistul surprinde fizionomia și profilul spiritual ascetic al marelui poet și prozator Vasile Voiculescu cu o modelare sobră și plină de calitate.",
+    "narrative_en": "A portrait study illustrating the sculptor’s mastery of classical figurative sculpture. The artist renders the features and spiritual gravity of writer Vasile Voiculescu with austere modeling and restraint.",
+    "image_url": "",
+    "folders": [
+      "38_Bust_Portret_Fata_Bronz"
+    ],
+    "featured": true
   },
   {
-    id: "monumentul-romania-100",
-    title: "Monumentul simbolic „România 100”",
-    title_en: "Symbolic Monument “Romania 100”",
-    year: 2018,
-    materials: "Piatră cioplită în combinație cu structură metalică",
-    materials_en: "Carved stone combined with steel structure",
-    dimensions: "Sculptură monumentală comemorativă",
-    dimensions_en: "Commemorative monumental sculpture",
-    category: "Sculptură Monumentală",
-    location: "Parcul Municipal Vest, Ploiești",
-    location_en: "West Municipal Park, Ploiești",
-    narrative:
-      "Creată cu prilejul Centenarului Marii Uniri, lucrarea îmbină masivitatea pietrei cu forța liniei metalice. Compoziția este construită pe ideea de continuitate, stăpânire a spațiului și durabilitate istorică.",
-    narrative_en:
-      "Created for the Great Union Centenary, this work unites stone mass with steel lines. The composition articulates historical continuity, permanence, and spatial presence.",
-    image_url: "/images/artworks/monumentul-romania-100.jpg",
-    featured: true,
+    "id": "monumentul-romania-100",
+    "title": "Monumentul simbolic „România 100” (Lună de Piatră)",
+    "title_en": "Symbolic Monument “Romania 100” (Stone Moon)",
+    "year": 2018,
+    "materials": "Piatră cioplită în combinație cu structură metalică",
+    "materials_en": "Carved stone combined with steel structure",
+    "dimensions": "Sculptură monumentală comemorativă",
+    "dimensions_en": "Commemorative monumental sculpture",
+    "category": "Sculptură Monumentală",
+    "location": "Parcul Municipal Vest, Ploiești",
+    "location_en": "West Municipal Park, Ploiești",
+    "narrative": "Creată cu prilejul Centenarului Marii Uniri, lucrarea îmbină masivitatea pietrei cu forța liniei metalice. Compoziția este construită pe ideea de continuitate, stăpânire a spațiului și durabilitate istorică.",
+    "narrative_en": "Created for the Great Union Centenary, this work unites stone mass with steel lines. The composition articulates historical continuity, permanence, and spatial presence.",
+    "image_url": "",
+    "folders": [
+      "34_Luna_de_Piatra_Piata"
+    ],
+    "featured": true
   },
   {
-    id: "ciclul-silueta-cuplu-tors-emily",
-    title: "Ciclul Siluetă, Cuplu, Tors, Emily",
-    title_en: "Cycle Silhouette, Couple, Torso, Emily",
-    year: 2018,
-    materials: "Metal, foi de oțel, bronz, tehnici mixte",
-    materials_en: "Steel sheet, bronze, mixed metal technique",
-    dimensions: "Dimensiuni de atelier",
-    dimensions_en: "Studio dimensions",
-    category: "Sculptură de Atelier",
-    location: "Colecții publice și particulare (România, Germania, Olanda)",
-    location_en: "Public and private collections (Romania, Germany, Netherlands)",
-    narrative:
-      "Latura lirică și senină a creației lui Hojbotă. Formele sugerează subtil conturul corpului uman (Siluetă, Tors), îngemănarea a două volume (Cuplu) sau grația juvenilă (Emily).",
-    narrative_en:
-      "Represents the lyrical dimension of Hojbotă's studio work. The forms subtly suggest human contours (Silhouette, Torso), paired volumes (Couple), or delicate figurative gestures.",
-    image_url: "/images/artworks/ciclul-silueta-cuplu-tors-emily.jpg",
-    featured: false,
+    "id": "ciclul-dantesca-conflict-vibratie",
+    "title": "Ciclul Dantescă, Conflict, Vibrație (Ruptură Nucleu)",
+    "title_en": "Cycle Dantesque, Conflict, Vibration (Core Rupture)",
+    "year": 2015,
+    "materials": "Bronz turnat, oțel inoxidabil, aluminiu",
+    "materials_en": "Cast bronze, stainless steel, aluminum",
+    "dimensions": "Sculpturi nonfigurative de medii și mari dimensiuni",
+    "dimensions_en": "Medium and large nonfigurative sculptures",
+    "category": "Cicluri Conceptual",
+    "location": "Muzeul de Artă Craiova / Galeriile UAP (Simeza, Orizont)",
+    "location_en": "Craiova Art Museum / UAPR Galleries (Simeza, Orizont)",
+    "narrative": "Serie cu o pronunțată încărcătură dramatică și filozofică. Lucrările din ciclul Dantescă sau Conflict folosesc suduri vizibile, unghiuri ascuțite, inserții de aur și patine întunecate pentru a exprima confruntarea interiorizată.",
+    "narrative_en": "A series exploring dramatic visual philosophy. Utilizing exposed welds, sharp angles, gold leaf accents, and dark patinas, these nonfigurative works embody interior tension and spatial resonance.",
+    "image_url": "",
+    "folders": [
+      "39_Ruptura_Nucleu_Bronz_Aur",
+      "18_Nucleu_Fisura_de_Aur"
+    ],
+    "featured": true
   },
   {
-    id: "ciclul-dantesca-conflict-vibratie",
-    title: "Ciclul Dantescă, Conflict, Vibrație",
-    title_en: "Cycle Dantesque, Conflict, Vibration",
-    year: 2015,
-    materials: "Bronz, oțel inoxidabil, aluminiu",
-    materials_en: "Bronze, stainless steel, aluminum",
-    dimensions: "Sculpturi nonfigurative de medii și mari dimensiuni",
-    dimensions_en: "Medium and large nonfigurative sculptures",
-    category: "Cicluri Conceptual",
-    location: "Muzeul de Artă Craiova / Galeriile UAP (Simeza, Orizont)",
-    location_en: "Craiova Art Museum / UAPR Galleries (Simeza, Orizont)",
-    narrative:
-      "Serie cu o pronunțată încărcătură dramatică și filozofică. Lucrările din ciclul Dantescă sau Conflict folosesc suduri vizibile, unghiuri ascuțite și patine întunecate pentru a exprima confruntarea interiorizată.",
-    narrative_en:
-      "A series exploring dramatic visual philosophy. Utilizing exposed welds, sharp angles, and dark patinas, these nonfigurative works embody interior tension and spatial resonance.",
-    image_url: "/images/artworks/ciclul-dantesca-conflict-vibratie.jpg",
-    featured: false,
+    "id": "sculptura-parcul-titan",
+    "title": "Sculptură Monumentală Metal (Parcul Titan & Lamă Verticală Inox)",
+    "title_en": "Monumental Metal Sculpture (Titan Park & Vertical Stainless Steel Blade)",
+    "year": 2013,
+    "materials": "Foi de oțel debitate, deformate la rece și sudate",
+    "materials_en": "Cold-formed, flame-cut, and welded steel sheets",
+    "dimensions": "Înălțime cca. 4 metri",
+    "dimensions_en": "Height approx. 4 meters",
+    "category": "Sculptură Monumentală",
+    "location": "Parcul Titan (Parcul Artelor), Sector 3, București",
+    "location_en": "Titan Park (Arts Park), Sector 3, Bucharest",
+    "narrative": "Realizată în cadrul taberei „Sculptura Mileniului 3”, această operă exemplifică forța industrială transpusă în artă pură. Foaia grea de metal este transformată într-o structură spațială suplă, aeriană, ale cărei muchii ascuțite și decupaje creează perspective schimbătoare în atelier, curte și spațiul verde public.",
+    "narrative_en": "Constructed during the “3rd Millennium Sculpture” symposium at the Republica industrial plant. Heavy steel plates are transformed into an airy spatial structure whose sharp edges and openings offer shifting visual perspectives.",
+    "image_url": "",
+    "folders": [
+      "31_Lama_Verticala_Inox_Parc",
+      "30_Lama_Verticala_Inox_Curte",
+      "29_Lama_Verticala_Inox_Studio"
+    ],
+    "featured": true
   },
   {
-    id: "sculptura-parcul-titan",
-    title: "Sculptură Monumentală Metal – Parcul Titan",
-    title_en: "Monumental Metal Sculpture – Titan Park",
-    year: 2013,
-    materials: "Foi de oțel debitate, deformate la rece și sudate",
-    materials_en: "Cold-formed, flame-cut, and welded steel sheets",
-    dimensions: "Înălțime cca. 4 metri",
-    dimensions_en: "Height approx. 4 meters",
-    category: "Sculptură Monumentală",
-    location: "Parcul Titan (Parcul Artelor), Sector 3, București",
-    location_en: "Titan Park (Arts Park), Sector 3, Bucharest",
-    narrative:
-      "Realizată în cadrul taberei „Sculptura Mileniului 3”, această operă exemplifică forța industrială transpusă în artă pură. Foaia grea de metal este transformată într-o structură spațială suplă, aeriană, ale cărei muchii ascuțite și decupaje creează perspective schimbătoare.",
-    narrative_en:
-      "Constructed during the “3rd Millennium Sculpture” symposium at the Republica industrial plant. Heavy steel plates are transformed into an airy spatial structure whose sharp edges and openings offer shifting visual perspectives.",
-    image_url: "/images/artworks/sculptura-parcul-titan.jpg",
-    featured: true,
+    "id": "moment-de-zbor",
+    "title": "Moment de zbor (Păsăre în Zbor, Aripă Dublă & Coloană)",
+    "title_en": "Moment of Flight (Bird in Flight, Double Wing & Column)",
+    "year": 2013,
+    "materials": "Oțel inoxidabil (inox) polizat și finisat manual",
+    "materials_en": "Polished and hand-finished stainless steel",
+    "dimensions": "Sculptură de atelier cu mișcare ascensională",
+    "dimensions_en": "Studio sculpture with ascending motion",
+    "category": "Sculptură de Atelier",
+    "location": "Premiul Muzeului Național de Artă al Moldovei (Saloanele Moldovei)",
+    "location_en": "National Art Museum of Moldova Award (Moldavia Salons)",
+    "narrative": "Una dintre cele mai rafinate căutări ale artistului pe tema eliberării de gravitație. Utilizând lamele subțiri de inox tăiate cu precizie, Hojbotă esențializează mișcarea ascensională, dizolvând rigoarea materialului dur într-un dinamism muzical.",
+    "narrative_en": "An exploration of gravity and movement in metal. Using precisely cut stainless steel blades, Hojbotă renders upward motion, dissolving the rigidity of hard steel into rhythmic spatial lines.",
+    "image_url": "",
+    "folders": [
+      "01_Pasare_in_Zbor_Inox",
+      "05_Coloana_Zbor_Vertical",
+      "07_Aripa_Dubla_Galerie",
+      "07b_Sculptura_Abstracta_Galerie",
+      "23_Pasare_Ovala_Inox",
+      "28_Pasarea_Maiastra_Parc"
+    ],
+    "featured": true
   },
   {
-    id: "moment-de-zbor",
-    title: "Moment de zbor",
-    title_en: "Moment of Flight",
-    year: 2013,
-    materials: "Oțel inoxidabil (inox) polizat și finisat",
-    materials_en: "Polished and hand-finished stainless steel",
-    dimensions: "Sculptură de atelier",
-    dimensions_en: "Studio sculpture",
-    category: "Sculptură de Atelier",
-    location: "Premiul Muzeului Național de Artă al Moldovei (Saloanele Moldovei)",
-    location_en: "National Art Museum of Moldova Award (Moldavia Salons)",
-    narrative:
-      "Una dintre cele mai rafinate căutări ale artistului pe tema eliberării de gravitație. Utilizând lamele subțiri de inox tăiate cu precizie, Hojbotă esențializează mișcarea ascensională, dizolvând rigoarea materialului dur într-un dinamism muzical.",
-    narrative_en:
-      "An exploration of gravity and movement in metal. Using precisely cut stainless steel blades, Hojbotă renders upward motion, dissolving the rigidity of hard steel into rhythmic spatial lines.",
-    image_url: "/images/artworks/moment-de-zbor.jpg",
-    featured: true,
+    "id": "ganditorul-lama-curba",
+    "title": "Gânditorul – Lamă Curbă (Ansamblu Curte & Alee)",
+    "title_en": "The Thinker – Curved Blade (Courtyard & Alley Ensemble)",
+    "year": 2021,
+    "materials": "Oțel inoxidabil (inox) deformat la rece și sudat",
+    "materials_en": "Cold-formed and welded stainless steel",
+    "dimensions": "Sculptură monumentală ambientală",
+    "dimensions_en": "Environmental monumental sculpture",
+    "category": "Sculptură Monumentală",
+    "location": "Amplasament privat / Parcul de sculptură",
+    "location_en": "Private installation / Sculpture park",
+    "narrative": "Lucrare monumentală reprezentativă din seria Gânditorul, explorând tensiunea dintre forma curbată a lamei de inox și forța reflexiilor în mediul exterior pe alee și în curte.",
+    "narrative_en": "Representative monumental work from The Thinker series, exploring tension between the curved stainless steel blade and exterior ambient reflections.",
+    "image_url": "",
+    "folders": [
+      "08_Ganditorul_Lama_Curba_Curte",
+      "08b_Ganditorul_Lama_Curba_Alee"
+    ],
+    "featured": true
   },
   {
-    id: "sculptura-zbor-sangeorz-bai",
-    title: "Sculptură Zbor – artFORest",
-    title_en: "Flight Sculpture – artFORest",
-    year: 2012,
-    materials: "Structură din oțel debitat și patinat",
-    materials_en: "Flame-cut patinated steel structure",
-    dimensions: "Sculptură monumentală ambientală",
-    dimensions_en: "Environmental monumental sculpture",
-    category: "Sculptură Monumentală",
-    location: "Muzeul de Artă Comparată, Sângeorz-Băi",
-    location_en: "Museum of Comparative Art, Sângeorz-Băi",
-    narrative:
-      "Amplasată la intrarea spațiului muzeal din Sângeorz-Băi, lucrarea din oțel funcționează ca o poartă sau introducere simbolică în lumea artei vizuale contemporane, deschizând căi de aspirație spirituală.",
-    narrative_en:
-      "Installed at the entrance of the Museum of Comparative Art in Sângeorz-Băi, this steel monument serves as a symbolic portal, establishing a dialogue between contemporary metal sculpture and surrounding nature.",
-    image_url: "/images/artworks/sculptura-zbor-sangeorz-bai.jpg",
-    featured: false,
+    "id": "sculptura-angulara-mecanica",
+    "title": "Sculptură Angulară Mecanică",
+    "title_en": "Angular Mechanical Sculpture",
+    "year": 2019,
+    "materials": "Inox și oțel sudat, muchii debitate",
+    "materials_en": "Stainless steel and welded iron, cut edges",
+    "dimensions": "Sculptură de atelier",
+    "dimensions_en": "Studio sculpture",
+    "category": "Sculptură de Atelier",
+    "location": "Atelierul artistului / Colecție privată",
+    "location_en": "Artist studio / Private collection",
+    "narrative": "Compoziție dinamică angulară explorând angrenajul spațial și rigoarea geometrică în oțel inoxidabil.",
+    "narrative_en": "Dynamic angular composition exploring spatial mechanics and geometric rigor in stainless steel.",
+    "image_url": "",
+    "folders": [
+      "02_Sculptura_Angulara_Mecanica"
+    ],
+    "featured": true
   },
-  // "bustul-paul-bran" (bronz turnat patinat · 2004 · Corpul „Paul Bran”, ASE
-  // București) is withheld: the only asset on file for it is a commemorative
-  // banner of Paul Bran himself, not a photograph of the bust. Restore the full
-  // record from git history once a photograph of the work exists at
-  // /images/artworks/bustul-paul-bran.jpg.
+  {
+    "id": "pasarea-de-foc-rugaciune",
+    "title": "Pasărea de Foc (Rugăciune & Colivie)",
+    "title_en": "Firebird (Prayer & Cage)",
+    "year": 2020,
+    "materials": "Oțel fasonat la cald și rece, sudură structurală",
+    "materials_en": "Hot and cold formed steel, structural welding",
+    "dimensions": "Sculptură conceptuală de atelier",
+    "dimensions_en": "Conceptual studio sculpture",
+    "category": "Sculptură de Atelier",
+    "location": "Colecție privată",
+    "location_en": "Private collection",
+    "narrative": "Explorează mitul pasării tutelare prin grilaje de oțel fasonat, contrapunctând libertatea ascensională a zborului cu spațiul protector al structurii metalice.",
+    "narrative_en": "Explores the mythic avian figure through formed steel bars, contrasting flight ascension with spatial containment.",
+    "image_url": "",
+    "folders": [
+      "04_Pasarea_de_Foc_Rugaciune",
+      "22_Pasarea_in_Colivie"
+    ],
+    "featured": true
+  },
+  {
+    "id": "relief-valuri-inox",
+    "title": "Relief Valuri în Inox",
+    "title_en": "Wave Relief in Stainless Steel",
+    "year": 2021,
+    "materials": "Foaie de oțel inoxidabil deformată plastic și polizată",
+    "materials_en": "Plastically deformed and polished stainless steel sheet",
+    "dimensions": "Relief metalic de perete / modul de atelier",
+    "dimensions_en": "Metallic wall relief / studio module",
+    "category": "Cicluri Conceptual",
+    "location": "Colecție de atelier",
+    "location_en": "Studio collection",
+    "narrative": "Relief metalic tactil în care ondularea foii de inox generează reflexii fluide ce își schimbă aspectul în funcție de unghiul de iluminare.",
+    "narrative_en": "Tactile metallic relief where undulating stainless steel sheets generate fluid reflections shifting with light angles.",
+    "image_url": "",
+    "folders": [
+      "06_Relief_Valuri_Inox"
+    ],
+    "featured": true
+  },
+  {
+    "id": "stela-reflexii-inox",
+    "title": "Stelă cu Reflexii în Inox",
+    "title_en": "Stele with Stainless Steel Reflections",
+    "year": 2022,
+    "materials": "Oțel inoxidabil finisat oglindă și soclu din granit",
+    "materials_en": "Mirror-finished stainless steel and granite base",
+    "dimensions": "Stelă sculpturală de medii dimensiuni",
+    "dimensions_en": "Medium-scale sculptural stele",
+    "category": "Sculptură de Atelier",
+    "location": "Galerie / Colecție privată",
+    "location_en": "Gallery / Private collection",
+    "narrative": "Stelă verticală din inox polizat, având planuri refractate ce multiplică spațiul galeriei într-un joc optic sofisticat.",
+    "narrative_en": "Vertical polished stainless steel stele featuring refracted planes that multiply gallery space into sophisticated optical play.",
+    "image_url": "",
+    "folders": [
+      "09_Stela_Reflexii_Inox_Galerie"
+    ],
+    "featured": true
+  },
+  {
+    "id": "luna-forma-dinamica-inox",
+    "title": "Lună – Formă Dinamică în Inox",
+    "title_en": "Moon – Dynamic Form in Stainless Steel",
+    "year": 2021,
+    "materials": "Inox debitat, deformat la rece și finisat",
+    "materials_en": "Cut, cold-worked, and finished stainless steel",
+    "dimensions": "Sculptură sferică / lunară de atelier",
+    "dimensions_en": "Spherical / lunar studio sculpture",
+    "category": "Sculptură de Atelier",
+    "location": "Colecție privată",
+    "location_en": "Private collection",
+    "narrative": "Interpretare sculpturală a volumului lunar prin foi curbate din oțel inoxidabil, combinând tăieturile geometrice cu reflexia caldă a mediului ambiant.",
+    "narrative_en": "Sculptural interpretation of lunar volume using curved stainless steel sheets, pairing geometric cuts with ambient reflections.",
+    "image_url": "",
+    "folders": [
+      "16_Luna_Forma_Dinamica_Inox"
+    ],
+    "featured": true
+  },
+  {
+    "id": "nautilus-relief-cupru",
+    "title": "Nautilus – Relief în Cupru",
+    "title_en": "Nautilus – Copper Relief",
+    "year": 2019,
+    "materials": "Cupru martelat, patinat și structură de oțel",
+    "materials_en": "Hammered, patinated copper and steel frame",
+    "dimensions": "Relief sculptat în spira organică",
+    "dimensions_en": "Organic spiral carved relief",
+    "category": "Cicluri Conceptual",
+    "location": "Colecție de atelier",
+    "location_en": "Studio collection",
+    "narrative": "Studiu al spiralei logaritmice organice transpuse în relief din cupru martelat manual, combinând patine calde de cupru cu rigoarea geometrică a secțiunii de aur.",
+    "narrative_en": "Study of logarithmic spiral forms in hand-hammered copper relief, combining warm patinas with golden ratio geometry.",
+    "image_url": "",
+    "folders": [
+      "17_Nautilus_Relief_Cupru"
+    ],
+    "featured": true
+  },
+  {
+    "id": "sfera-ochiul-lumii",
+    "title": "Sferă – Ochiul Lumii",
+    "title_en": "Sphere – Eye of the World",
+    "year": 2020,
+    "materials": "Inox și aliaje metalice polizate",
+    "materials_en": "Polished stainless steel and metal alloys",
+    "dimensions": "Sculptură sferică de atelier",
+    "dimensions_en": "Spherical studio sculpture",
+    "category": "Sculptură de Atelier",
+    "location": "Colecție privată",
+    "location_en": "Private collection",
+    "narrative": "Sferă concav-convexă din inox ce funcționează ca o lentilă metalică reflectantă, captând privitorul și mediul înconjurător în centrul compoziției.",
+    "narrative_en": "Concave-convex stainless steel sphere acting as a reflective metallic lens, placing the viewer in the composition center.",
+    "image_url": "",
+    "folders": [
+      "21_Sfera_Ochiul_Lumii"
+    ],
+    "featured": true
+  },
+  {
+    "id": "picatura-sticla-cupru",
+    "title": "Picătură – Sticlă și Cupru",
+    "title_en": "Drop – Glass and Copper",
+    "year": 2020,
+    "materials": "Sticlă termoformată și cupru finisat",
+    "materials_en": "Thermoformed glass and finished copper",
+    "dimensions": "Sculptură mixtă sticlă-metal",
+    "dimensions_en": "Mixed glass-metal sculpture",
+    "category": "Cicluri Conceptual",
+    "location": "Colecție privată",
+    "location_en": "Private collection",
+    "narrative": "Lucrare mixtă ce alătură transparența lichidă a sticlei calde cu densitatea flexibilă a cuprului patinat, într-un dialog sculptural dintre lumină și materie.",
+    "narrative_en": "Mixed media work pairing glass transparency with flexible patinated copper density in a light-material dialogue.",
+    "image_url": "",
+    "folders": [
+      "24_Picatura_Sticla_Cupru"
+    ],
+    "featured": true
+  },
+  {
+    "id": "cartea-timpului-cupru",
+    "title": "Cartea Timpului – Reliefe în Cupru",
+    "title_en": "Book of Time – Copper Reliefs",
+    "year": 2019,
+    "materials": "Cupru martelat, gravat și patinat",
+    "materials_en": "Hammered, engraved, and patinated copper",
+    "dimensions": "Serie de obiecte sculpturale / carte-obiect",
+    "dimensions_en": "Sculptural book-object series",
+    "category": "Cicluri Conceptual",
+    "location": "Colecție privată / Galerie",
+    "location_en": "Private collection / Gallery",
+    "narrative": "Ciclul conceptual Cartea Timpului explorează foi de cupru gravate și martelate ca niște pagini metalice purtătoare de memorie și patina timpului.",
+    "narrative_en": "The Book of Time cycle explores engraved copper sheets as metal pages carrying memory and historical patina.",
+    "image_url": "",
+    "folders": [
+      "25_Cartea_Timpului_Cupru"
+    ],
+    "featured": true
+  },
+  {
+    "id": "astrolab-constructie-fier",
+    "title": "Astrolab – Construcție în Fier",
+    "title_en": "Astrolabe – Iron Construction",
+    "year": 2018,
+    "materials": "Fier forjat, debitat la flacără și sudat structural",
+    "materials_en": "Flame-cut forged iron and structural welding",
+    "dimensions": "Construcție spațială de atelier",
+    "dimensions_en": "Spatial studio construction",
+    "category": "Sculptură de Atelier",
+    "location": "Colecție privată / Atelier",
+    "location_en": "Private collection / Studio",
+    "narrative": "Construcție tridimensională din fier masiv inspirată de vechile instrumente de măsurare ale bolții cerești, combinând rigoarea inginerească cu dinamismul sculptural.",
+    "narrative_en": "Three-dimensional iron construction inspired by astronomical measuring tools, pairing engineering precision with sculptural energy.",
+    "image_url": "",
+    "folders": [
+      "26_Astrolab_Constructie_Fier"
+    ],
+    "featured": true
+  },
+  {
+    "id": "forma-curba-soclu-lemn",
+    "title": "Formă Curbă pe Soclu din Lemn",
+    "title_en": "Curved Form on Wooden Pedestal",
+    "year": 2019,
+    "materials": "Oțel inoxidabil polizat și soclu din lemn de stejar",
+    "materials_en": "Polished stainless steel and oak pedestal",
+    "dimensions": "Sculptură de atelier pe soclu",
+    "dimensions_en": "Studio sculpture on wooden pedestal",
+    "category": "Sculptură de Atelier",
+    "location": "Colecție privată",
+    "location_en": "Private collection",
+    "narrative": "Dialogul dintre strălucirea rece a inoxului curvat și textura caldă, organică a soclului de lemn cioplit.",
+    "narrative_en": "Dialogue between cold polished stainless steel curves and the warm organic texture of carved wooden pedestal.",
+    "image_url": "",
+    "folders": [
+      "14_Sculptura_Curba_Soclu_Lemn"
+    ],
+    "featured": true
+  },
+  {
+    "id": "balustrada-scara-vitraliu",
+    "title": "Design Balustradă & Vitraliu Metalic",
+    "title_en": "Railing Design & Metal Stained Glass",
+    "year": 2021,
+    "materials": "Oțel fasonat, sticlă colorată și inserții metalice",
+    "materials_en": "Formed steel, colored glass, and metal inserts",
+    "dimensions": "Proiect sculptural arhitectural",
+    "dimensions_en": "Architectural sculptural project",
+    "category": "Trofee & Design Metalic",
+    "location": "Lucrare arhitecturală de comision",
+    "location_en": "Architectural commissioned work",
+    "narrative": "Integrarea esteticii sculptural-metalice în arhitectura de interior prin module de balustradă și vitralii metalice personalizate.",
+    "narrative_en": "Integration of metal sculpture aesthetics into interior architecture through custom stair railings and metal-framed glass.",
+    "image_url": "",
+    "folders": [
+      "33_Balustrada_Scara_Vitraliu"
+    ],
+    "featured": true
+  },
+  {
+    "id": "proces-creatie-atelier",
+    "title": "Secvențe din Procesul de Creație în Atelier",
+    "title_en": "Creation Sequences in Studio Workshop",
+    "year": 2022,
+    "materials": "Meta-documentar vizual: sudură, deformare la rece, brunare",
+    "materials_en": "Visual meta-documentary: welding, cold plastic working",
+    "dimensions": "Serie fotografică de proces",
+    "dimensions_en": "Process photographic series",
+    "category": "Cicluri Conceptual",
+    "location": "Atelierul UNArte / Atelierul personal",
+    "location_en": "UNArte Workshop / Personal Studio",
+    "narrative": "Documentar vizual amplu captând rigoarea tehnică, scânteile sudurii, debitarea foilor de inox și măiestria fasonării metalului direct în atelierul profesorului Bogdan Severin Hojbotă.",
+    "narrative_en": "Comprehensive photo document capturing technical rigor, welding sparks, flame cutting, and metalworking craftsmanship in Prof. Bogdan Severin Hojbotă's studio.",
+    "image_url": "",
+    "folders": [
+      "13_Proces_Creatie_Atelier"
+    ],
+    "featured": true
+  },
+  {
+    "id": "portrete-artist-galerie",
+    "title": "Portrete și Activitate în Galerie & Exponențial",
+    "title_en": "Artist Portraits & Gallery Exhibition Activity",
+    "year": 2023,
+    "materials": "Arhivă vizuală: vernisaje, portrete de atelier și ansambluri",
+    "materials_en": "Visual archive: openings, studio portraits, ensembles",
+    "dimensions": "Arhivă fotografică de activitate",
+    "dimensions_en": "Activity photo archive",
+    "category": "Cicluri Conceptual",
+    "location": "Galeriile UAPR / WIN Gallery / Expoziții",
+    "location_en": "UAPR Galleries / WIN Gallery / Exhibitions",
+    "narrative": "Portrete ale maestrului sculptor Bogdan Severin Hojbotă în galeriile de artă, alături de operele sale majore, vernisaje și ansambluri sculpturale de expoziție.",
+    "narrative_en": "Portraits of master sculptor Bogdan Severin Hojbotă in art galleries alongside major works, exhibition openings, and sculptural ensembles.",
+    "image_url": "",
+    "folders": [
+      "35_Portrete_Artist_Galerie",
+      "27_Expozitie_Ansamblu"
+    ],
+    "featured": true
+  },
+  {
+    "id": "schite-si-desen-proiect",
+    "title": "Schițe și Desen de Proiect Sculptural",
+    "title_en": "Sculptural Project Sketches & Drawings",
+    "year": 2020,
+    "materials": "Tuș, cărbune și schițe tehnice pe hârtie",
+    "materials_en": "Ink, charcoal, and technical sketches on paper",
+    "dimensions": "Desene și schițe pregătitoare",
+    "dimensions_en": "Preparatory drawings and sketches",
+    "category": "Cicluri Conceptual",
+    "location": "Arhiva de atelier",
+    "location_en": "Studio archives",
+    "narrative": "Schiță pregătitoare de atelier dezvăluind gândirea spațială și liniile de forță ce stau la baza fiecărui monument și ființe sculpturale din metal.",
+    "narrative_en": "Preparatory studio drawing revealing spatial thinking and force lines underlying every metal monument and sculpture.",
+    "image_url": "",
+    "folders": [
+      "32_Schite_si_Desen_Proiect",
+      "03_Scut_Solar_Mecanism"
+    ],
+    "featured": false
+  }
 ]
 
-export function getArtworks(lang: Language = "ro"): ArtworkData[] {
-  if (lang === "en") {
-    return ARTWORKS.map((art) => ({
-      ...art,
-      title: art.title_en || art.title,
-      materials: art.materials_en || art.materials,
-      dimensions: art.dimensions_en || art.dimensions,
-      location: art.location_en || art.location,
-      narrative: art.narrative_en || art.narrative,
-    }))
+export function resolveArtworkImages(art: ArtworkData): string[] {
+  const images: string[] = []
+  const map = lucrariImagesMap as Record<string, string[]>
+
+  if (art.folders && art.folders.length > 0) {
+    art.folders.forEach((folderName) => {
+      const folderImgs = map[folderName]
+      if (folderImgs && folderImgs.length > 0) {
+        images.push(...folderImgs)
+      }
+    })
   }
-  return ARTWORKS
+
+  const unique = Array.from(new Set(images))
+  return unique.length > 0 ? unique : ["/placeholder.jpg"]
+}
+
+export function getArtworks(lang: Language = "ro"): ArtworkData[] {
+  return ARTWORKS.map((art) => {
+    const resolvedImages = resolveArtworkImages(art)
+    const primaryUrl = art.image_url || resolvedImages[0] || "/placeholder.jpg"
+
+    const base = {
+      ...art,
+      image_url: primaryUrl,
+      images: resolvedImages,
+    }
+
+    if (lang === "en") {
+      return {
+        ...base,
+        title: art.title_en || art.title,
+        materials: art.materials_en || art.materials,
+        dimensions: art.dimensions_en || art.dimensions,
+        location: art.location_en || art.location,
+        narrative: art.narrative_en || art.narrative,
+      }
+    }
+    return base
+  })
 }
 
 export function getArtwork(id: string, lang: Language = "ro"): ArtworkData | undefined {
@@ -495,18 +827,6 @@ export const EVENTS: EventData[] = [
     location_en: "Titan Park, Bucharest",
     description: "Execuția sculpturii monumentale de metal de 4 metri înălțime la platforma industrială Republica.",
     description_en: "Execution of the 4-meter monumental steel sculpture fabricated at the Republica industrial plant.",
-  },
-  {
-    id: "artforest-2012",
-    title: "Simpozionul de Land Art artFORest",
-    title_en: "Land Art Symposium artFORest",
-    year: 2012,
-    startDate: "2012-07-15",
-    type: "symposium",
-    location: "Muzeul de Artă Comparată, Sângeorz-Băi",
-    location_en: "Museum of Comparative Art, Sângeorz-Băi",
-    description: "Instalarea sculpturii monumentale din oțel „Zbor” la intrarea muzeului.",
-    description_en: "Installation of the monumental steel sculpture “Flight” at the museum entrance.",
   },
   {
     id: "contraste-2012",

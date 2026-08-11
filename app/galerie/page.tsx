@@ -9,7 +9,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { getArtworks } from "@/lib/data/artist-data"
 import { useLanguage } from "@/lib/context/language-context"
-import { Search, ArrowRight, MapPin } from "lucide-react"
+import { Search, ArrowRight, MapPin, Images } from "lucide-react"
 
 export default function GalleryPage() {
   const [searchQuery, setSearchQuery] = useState("")
@@ -124,6 +124,12 @@ export default function GalleryPage() {
                           sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                           className="object-contain"
                         />
+                        {art.images && art.images.length > 1 && (
+                          <div className="absolute top-2.5 right-2.5 z-10 flex items-center gap-1 bg-slate-900/85 backdrop-blur-md text-white text-[10px] font-mono px-2 py-0.5 rounded border border-white/10 shadow-sm" suppressHydrationWarning>
+                            <Images className="w-3 h-3 text-amber-400" />
+                            <span suppressHydrationWarning>{art.images.length}</span>
+                          </div>
+                        )}
                       </div>
 
                       <div className="pt-5 flex flex-col flex-1">

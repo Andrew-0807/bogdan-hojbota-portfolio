@@ -21,7 +21,6 @@ export default function ContactPage() {
 
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
-  const [phone, setPhone] = useState("")
   const [inquiryType, setInquiryType] = useState<string>("commission_monumental")
   const [message, setMessage] = useState("")
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle")
@@ -49,7 +48,6 @@ export default function ContactPage() {
         body: JSON.stringify({
           name,
           email,
-          phone,
           inquiryType: label,
           message,
         }),
@@ -64,7 +62,6 @@ export default function ContactPage() {
         setStatus("success")
         setName("")
         setEmail("")
-        setPhone("")
         setMessage("")
       }
     } catch {
@@ -219,39 +216,22 @@ export default function ContactPage() {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                    <div className="space-y-2">
-                      <Label htmlFor="phone" className="text-[11px] uppercase tracking-[0.14em] text-slate-600 font-semibold">
-                        {t("contact_field_phone")}
-                      </Label>
-                      <Input
-                        id="phone"
-                        type="tel"
-                        value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
-                        autoComplete="tel"
-                        placeholder={t("contact_placeholder_phone")}
-                        className={fieldClass}
-                      />
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="inquiryType" className="text-[11px] uppercase tracking-[0.14em] text-slate-600 font-semibold">
-                        {t("contact_field_type")}
-                      </Label>
-                      <select
-                        id="inquiryType"
-                        value={inquiryType}
-                        onChange={(e) => setInquiryType(e.target.value)}
-                        className={`${fieldClass} w-full px-3 border rounded-none focus:outline-none focus:border-slate-900`}
-                      >
-                        {inquiryTypes.map((type) => (
-                          <option key={type.value} value={type.value}>
-                            {type.label}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="inquiryType" className="text-[11px] uppercase tracking-[0.14em] text-slate-600 font-semibold">
+                      {t("contact_field_type")}
+                    </Label>
+                    <select
+                      id="inquiryType"
+                      value={inquiryType}
+                      onChange={(e) => setInquiryType(e.target.value)}
+                      className={`${fieldClass} w-full px-3 border rounded-none focus:outline-none focus:border-slate-900`}
+                    >
+                      {inquiryTypes.map((type) => (
+                        <option key={type.value} value={type.value}>
+                          {type.label}
+                        </option>
+                      ))}
+                    </select>
                   </div>
 
                   <div className="space-y-2">

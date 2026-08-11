@@ -373,8 +373,8 @@ export const dictionary: Record<DictionaryKey, { ro: string; en: string }> = {
 
   contact_heading: { ro: "Contact", en: "Contact" },
   contact_sub: {
-    ro: "Pentru o sculptură monumentală, un bust omagial, o piesă de atelier sau un trofeu metalic unicat: apelați direct sau completați formularul de mai jos.",
-    en: "For monumental sculptures, memorial busts, studio works, or custom metal trophies, call directly or complete the form below.",
+    ro: "Pentru o sculptură monumentală, un bust omagial, o piesă de atelier sau un trofeu metalic unicat: scrieți direct prin email sau completați formularul de mai jos.",
+    en: "For monumental sculptures, memorial busts, studio works, or custom metal trophies, email directly or complete the form below.",
   },
   contact_direct: { ro: "Legătură directă", en: "Direct Contact" },
   contact_phone_sub: {

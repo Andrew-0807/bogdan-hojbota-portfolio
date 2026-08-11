@@ -4,7 +4,7 @@ import { Resend } from "resend"
 export async function POST(req: Request) {
   try {
     const body = await req.json()
-    const { name, email, phone, inquiryType, message } = body
+    const { name, email, inquiryType, message } = body
 
     if (!name || !email || !message) {
       return NextResponse.json(
@@ -19,7 +19,7 @@ export async function POST(req: Request) {
     if (!apiKey) {
       console.warn(
         "RESEND_API_KEY environment variable is not set. Simulating email send:",
-        { name, email, phone, inquiryType, message },
+        { name, email, inquiryType, message },
       )
       return NextResponse.json({
         success: true,
@@ -37,13 +37,12 @@ export async function POST(req: Request) {
       to: [receiverEmail],
       replyTo: email,
       subject: `[Website Comision] ${inquiryType} — ${name}`,
-      text: `Solicitare nouă de pe site-ul de portofoliu:\n\nNume: ${name}\nEmail: ${email}\nTelefon: ${phone || "Nespecificat"}\nTip Solicitare: ${inquiryType}\n\nMesaj:\n${message}`,
+      text: `Solicitare nouă de pe site-ul de portofoliu:\n\nNume: ${name}\nEmail: ${email}\nTip Solicitare: ${inquiryType}\n\nMesaj:\n${message}`,
       html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; color: #0f172a; padding: 20px; border: 1px solid #e2e8f0; border-radius: 8px;">
           <h2 style="color: #b45309; border-bottom: 2px solid #b45309; padding-bottom: 8px;">Solicitare Nouă de Comision</h2>
           <p><strong>Nume:</strong> ${name}</p>
           <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
-          <p><strong>Telefon:</strong> ${phone || "Nespecificat"}</p>
           <p><strong>Tip Solicitare:</strong> ${inquiryType}</p>
           <div style="margin-top: 16px; padding: 16px; background-color: #f8fafc; border-left: 4px solid #b45309;">
             <strong style="display: block; margin-bottom: 8px;">Mesaj:</strong>
